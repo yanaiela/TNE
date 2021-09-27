@@ -1,0 +1,35 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>BridgingExplorationTool</title>
+	<link rel="stylesheet" href="styles.css">
+	<script type="text/javascript">
+	var COLORS = ["#8cffd8", "#FF7F50", "#6495ED", "#BDB76B", "#DDA0DD", "#FF69B4", "#FFD700", "#F5DEB3"];
+	var PREPS = ['of', 'in', 'to', 'for', 'with', 'on', 'at', 'from', 'by', 'about', 'over', 'between', 'against', 'under', 'among', 'before', 'after'];
+	var IDX = 423;
+	var HIT_ID = 61215;
+	var BRIDGING_RESULTS_UNFOLDED = [{'bridge': 1, 'complement': 25, 'preposition': 'of', 'coref_cluster': 24}, {'bridge': 6, 'complement': 3, 'preposition': 'of', 'coref_cluster': 2}, {'bridge': 7, 'complement': 6, 'preposition': 'about', 'coref_cluster': 5}, {'bridge': 10, 'complement': 11, 'preposition': 'of', 'coref_cluster': 10}, {'bridge': 10, 'complement': 26, 'preposition': 'of', 'coref_cluster': 25}, {'bridge': 14, 'complement': 11, 'preposition': 'about', 'coref_cluster': 10}, {'bridge': 14, 'complement': 11, 'preposition': 'on', 'coref_cluster': 10}, {'bridge': 14, 'complement': 10, 'preposition': 'on', 'coref_cluster': 9}, {'bridge': 14, 'complement': 26, 'preposition': 'about', 'coref_cluster': 25}, {'bridge': 15, 'complement': 11, 'preposition': 'about', 'coref_cluster': 10}, {'bridge': 15, 'complement': 10, 'preposition': 'about', 'coref_cluster': 9}, {'bridge': 15, 'complement': 26, 'preposition': 'about', 'coref_cluster': 25}, {'bridge': 17, 'complement': 19, 'preposition': 'from', 'coref_cluster': 17}, {'bridge': 17, 'complement': 19, 'preposition': 'during', 'coref_cluster': 17}, {'bridge': 17, 'complement': 18, 'preposition': 'after', 'coref_cluster': 16}, {'bridge': 18, 'complement': 19, 'preposition': 'during', 'coref_cluster': 17}];
+	var CURR_SPLIT_HIT_IDS = []
+	var BRIDGING_RESULTS = [];
+	var text = {'raw_text': 'Friday Free-for-All | October 19, 2018 Author: AutoModerator AnnalsPornographie: "HEY YOU!  Do you listen to the podcast? Please fill out our podcast opinion / improvement poll here: https://goo.gl/forms/jflq5meKXIM4Hfql2"  MarijnBerg: "I\'m interested in the history of food, cooking and the different cultures around them. Can anyone recommend good books or documentaries on these?  "  Guardzilla1: "Did any medical advances come out of the Black Death during the Middle Ages?"  Schaden_FREUD_e: "PBS just put out a [documentary](https://www.pbs.org/video/the-eugenics-crusade-jtaetc/) on American eugenics and I\'m excited about it." ', 'title': {'start_index': 0, 'end_index': 38}, 'subtitles': [{'start_index': 39, 'end_index': 60, 'id': 0}], 'paragraphs': [{'start_index': 61, 'end_index': 223, 'id': 0}, {'start_index': 224, 'end_index': 386, 'id': 1}, {'start_index': 387, 'end_index': 479, 'id': 2}, {'start_index': 480, 'end_index': 635, 'id': 3}], 'indents': [0, 0, 0, 0], 'paragraph_authors': ['AnnalsPornographie', 'MarijnBerg', 'Guardzilla1', 'Schaden_FREUD_e']};
+	var nps = [{'start_index': 0, 'text': 'Friday', 'end_index': 6, 'id': 0}, {'start_index': 39, 'text': 'Author', 'end_index': 45, 'id': 1}, {'start_index': 47, 'text': 'AutoModerator', 'end_index': 60, 'id': 2}, {'start_index': 61, 'text': 'AnnalsPornographie', 'end_index': 79, 'id': 3}, {'start_index': 82, 'text': 'HEY YOU', 'end_index': 89, 'id': 4}, {'start_index': 95, 'text': 'you', 'end_index': 98, 'id': 5}, {'start_index': 109, 'text': 'the podcast', 'end_index': 120, 'id': 6}, {'start_index': 138, 'text': 'our podcast opinion / improvement poll', 'end_index': 176, 'id': 7}, {'end_index': 234, 'start_index': 224, 'text': 'MarijnBerg', 'id': 8}, {'start_index': 237, 'text': 'I', 'end_index': 238, 'id': 9}, {'start_index': 255, 'text': 'the history', 'end_index': 266, 'id': 10}, {'start_index': 270, 'text': 'food', 'end_index': 274, 'id': 11}, {'start_index': 318, 'text': 'them', 'end_index': 322, 'id': 12}, {'start_index': 328, 'text': 'anyone', 'end_index': 334, 'id': 13}, {'start_index': 345, 'text': 'good books', 'end_index': 355, 'id': 14}, {'start_index': 359, 'text': 'documentaries', 'end_index': 372, 'id': 15}, {'start_index': 387, 'text': 'Guardzilla1', 'end_index': 398, 'id': 16}, {'start_index': 405, 'text': 'any medical advances', 'end_index': 425, 'id': 17}, {'start_index': 438, 'text': 'the Black Death', 'end_index': 453, 'id': 18}, {'start_index': 461, 'text': 'the Middle Ages', 'end_index': 476, 'id': 19}, {'start_index': 480, 'text': 'Schaden_FREUD_e', 'end_index': 495, 'id': 20}, {'start_index': 498, 'text': 'PBS', 'end_index': 501, 'id': 21}, {'start_index': 515, 'text': 'a [documentary](https://www.pbs.org/video/the-eugenics-crusade-jtaetc/', 'end_index': 585, 'id': 22}, {'start_index': 590, 'text': 'American eugenics', 'end_index': 607, 'id': 23}, {'start_index': 612, 'text': 'I', 'end_index': 613, 'id': 24}, {'end_index': 19, 'start_index': 0, 'text': 'Friday Free-for-All', 'id': 25}, {'end_index': 322, 'start_index': 270, 'text': 'food, cooking and the different cultures around them', 'id': 26}];
+	var coref = [{'id': 0, 'members': [0]}, {'id': 1, 'members': [1, 2]}, {'id': 2, 'members': [3]}, {'id': 3, 'members': [4]}, {'id': 4, 'members': [5]}, {'id': 5, 'members': [6]}, {'id': 6, 'members': [7]}, {'id': 8, 'members': [9]}, {'id': 9, 'members': [10]}, {'id': 10, 'members': [11]}, {'id': 11, 'members': [13]}, {'id': 12, 'members': [14]}, {'id': 13, 'members': [15]}, {'id': 14, 'members': [16]}, {'id': 15, 'members': [17]}, {'id': 16, 'members': [18]}, {'id': 17, 'members': [19]}, {'id': 18, 'members': [24, 20]}, {'id': 19, 'members': [21]}, {'id': 20, 'members': [22]}, {'id': 21, 'members': [23]}, {'id': 22, 'members': [12]}, {'id': 23, 'members': [8]}, {'id': 24, 'members': [25]}, {'id': 25, 'members': [26]}];
+	var bridges = [];
+	var current_np_id = 0;
+	var url = 'N/A';
+	</script>
+	<script src='ood_ids.js'></script>
+	<script src='bridging_exploration.js'></script>
+	<script src="https://cdn.jsdelivr.net/npm/ractive"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
+</head>
+
+<body>
+<div id="page">
+	<script src='data_init.js'></script>
+</div>	
+</body>
+
+
+</html>

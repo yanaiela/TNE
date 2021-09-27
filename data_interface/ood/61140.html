@@ -1,0 +1,35 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>BridgingExplorationTool</title>
+	<link rel="stylesheet" href="styles.css">
+	<script type="text/javascript">
+	var COLORS = ["#8cffd8", "#FF7F50", "#6495ED", "#BDB76B", "#DDA0DD", "#FF69B4", "#FFD700", "#F5DEB3"];
+	var PREPS = ['of', 'in', 'to', 'for', 'with', 'on', 'at', 'from', 'by', 'about', 'over', 'between', 'against', 'under', 'among', 'before', 'after'];
+	var IDX = 410;
+	var HIT_ID = 61140;
+	var BRIDGING_RESULTS_UNFOLDED = [{'bridge': 0, 'complement': 2, 'preposition': 'about', 'coref_cluster': 2}, {'bridge': 0, 'complement': 4, 'preposition': 'about', 'coref_cluster': 2}, {'bridge': 9, 'complement': 2, 'preposition': 'about', 'coref_cluster': 2}, {'bridge': 9, 'complement': 4, 'preposition': 'about', 'coref_cluster': 2}, {'bridge': 9, 'complement': 0, 'preposition': 'member(s) of', 'coref_cluster': 0}, {'bridge': 10, 'complement': 2, 'preposition': 'about', 'coref_cluster': 2}, {'bridge': 10, 'complement': 4, 'preposition': 'about', 'coref_cluster': 2}, {'bridge': 10, 'complement': 0, 'preposition': 'member(s) of', 'coref_cluster': 0}, {'bridge': 15, 'complement': 5, 'preposition': 'to', 'coref_cluster': 4}, {'bridge': 15, 'complement': 6, 'preposition': 'to', 'coref_cluster': 4}, {'bridge': 15, 'complement': 19, 'preposition': 'about', 'coref_cluster': 14}, {'bridge': 15, 'complement': 18, 'preposition': 'about', 'coref_cluster': 13}, {'bridge': 15, 'complement': 17, 'preposition': 'about', 'coref_cluster': 12}, {'bridge': 17, 'complement': 21, 'preposition': 'about', 'coref_cluster': 16}, {'bridge': 17, 'complement': 19, 'preposition': 'for', 'coref_cluster': 14}, {'bridge': 17, 'complement': 18, 'preposition': 'about', 'coref_cluster': 13}, {'bridge': 17, 'complement': 0, 'preposition': 'member(s) of', 'coref_cluster': 0}, {'bridge': 17, 'complement': 25, 'preposition': 'about', 'coref_cluster': 21}, {'bridge': 18, 'complement': 26, 'preposition': 'in', 'coref_cluster': 22}, {'bridge': 19, 'complement': 17, 'preposition': 'of', 'coref_cluster': 12}, {'bridge': 22, 'complement': 2, 'preposition': 'between', 'coref_cluster': 2}, {'bridge': 22, 'complement': 4, 'preposition': 'between', 'coref_cluster': 2}, {'bridge': 22, 'complement': 21, 'preposition': 'between', 'coref_cluster': 16}, {'bridge': 22, 'complement': 21, 'preposition': 'in', 'coref_cluster': 16}, {'bridge': 23, 'complement': 24, 'preposition': 'about', 'coref_cluster': 19}, {'bridge': 23, 'complement': 21, 'preposition': 'in', 'coref_cluster': 16}, {'bridge': 23, 'complement': 21, 'preposition': 'from', 'coref_cluster': 16}, {'bridge': 24, 'complement': 21, 'preposition': 'in', 'coref_cluster': 16}];
+	var CURR_SPLIT_HIT_IDS = []
+	var BRIDGING_RESULTS = [];
+	var text = {'raw_text': 'Are there any history books which are more about "what it was like in the past" rather than "what happened in the past"? Author: TinMan918 thinksaboutnames: "Johan Huizinga \'The Autumn of the Middle Ages\' is indeed a classic and a very good reed. I found Philipp Blom \'The Vertigo years. Change and Culture in the West 1900-1914\' to be very good as well. "  qwerty_ca: "As an interesting follow-up, is anyone actually *writing* such a book right now about life in 2018 for future readers?"  marnues: "How would history even be written about the Internet age?  It\'s the opposite problem, there\'s just so much more happening, and even more information about each thing." ', 'title': {'start_index': 0, 'end_index': 120}, 'subtitles': [{'start_index': 121, 'end_index': 138, 'id': 0}], 'paragraphs': [{'start_index': 139, 'end_index': 357, 'id': 0}, {'start_index': 358, 'end_index': 490, 'id': 1}, {'start_index': 491, 'end_index': 669, 'id': 2}], 'indents': [0, 0, 1], 'paragraph_authors': ['thinksaboutnames', 'qwerty_ca', 'marnues']};
+	var nps = [{'start_index': 10, 'text': 'any history books', 'end_index': 27, 'id': 0}, {'start_index': 50, 'text': 'what', 'end_index': 54, 'id': 1}, {'start_index': 70, 'text': 'the past', 'end_index': 78, 'id': 2}, {'start_index': 93, 'text': 'what', 'end_index': 97, 'id': 3}, {'start_index': 110, 'text': 'the past', 'end_index': 118, 'id': 4}, {'start_index': 121, 'text': 'Author', 'end_index': 127, 'id': 5}, {'start_index': 129, 'text': 'TinMan918', 'end_index': 138, 'id': 6}, {'end_index': 155, 'start_index': 139, 'text': 'thinksaboutnames', 'id': 7}, {'start_index': 158, 'text': "Johan Huizinga 'The Autumn of the Middle Ages'", 'end_index': 204, 'id': 8}, {'start_index': 215, 'text': 'a classic', 'end_index': 224, 'id': 9}, {'start_index': 229, 'text': 'a very good reed', 'end_index': 245, 'id': 10}, {'start_index': 247, 'text': 'I', 'end_index': 248, 'id': 11}, {'start_index': 288, 'text': 'Change', 'end_index': 294, 'id': 12}, {'start_index': 299, 'text': 'Culture', 'end_index': 306, 'id': 13}, {'start_index': 310, 'text': 'the West', 'end_index': 318, 'id': 14}, {'start_index': 373, 'text': 'an interesting follow-up', 'end_index': 397, 'id': 15}, {'start_index': 402, 'text': 'anyone', 'end_index': 408, 'id': 16}, {'start_index': 428, 'text': 'such a book', 'end_index': 439, 'id': 17}, {'start_index': 456, 'text': 'life', 'end_index': 460, 'id': 18}, {'start_index': 473, 'text': 'future readers', 'end_index': 487, 'id': 19}, {'start_index': 491, 'text': 'marnues', 'end_index': 498, 'id': 20}, {'start_index': 541, 'text': 'the Internet age', 'end_index': 557, 'id': 21}, {'start_index': 565, 'text': 'the opposite problem', 'end_index': 585, 'id': 22}, {'start_index': 628, 'text': 'even more information', 'end_index': 649, 'id': 23}, {'start_index': 656, 'text': 'each thing', 'end_index': 666, 'id': 24}, {'end_index': 468, 'start_index': 456, 'text': 'life in 2018', 'id': 25}, {'end_index': 468, 'start_index': 464, 'text': '2018', 'id': 26}];
+	var coref = [{'id': 0, 'members': [0]}, {'id': 1, 'members': [1]}, {'id': 2, 'members': [2, 4]}, {'id': 3, 'members': [3]}, {'id': 4, 'members': [5, 6]}, {'id': 5, 'members': [9, 10, 8]}, {'id': 6, 'members': [11]}, {'id': 7, 'members': [12]}, {'id': 8, 'members': [13]}, {'id': 9, 'members': [14]}, {'id': 10, 'members': [15]}, {'id': 11, 'members': [16]}, {'id': 12, 'members': [17]}, {'id': 13, 'members': [18]}, {'id': 14, 'members': [19]}, {'id': 15, 'members': [20]}, {'id': 16, 'members': [21]}, {'id': 17, 'members': [22]}, {'id': 18, 'members': [23]}, {'id': 19, 'members': [24]}, {'id': 20, 'members': [7]}, {'id': 21, 'members': [25]}, {'id': 22, 'members': [26]}];
+	var bridges = [];
+	var current_np_id = 0;
+	var url = 'N/A';
+	</script>
+	<script src='ood_ids.js'></script>
+	<script src='bridging_exploration.js'></script>
+	<script src="https://cdn.jsdelivr.net/npm/ractive"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
+</head>
+
+<body>
+<div id="page">
+	<script src='data_init.js'></script>
+</div>	
+</body>
+
+
+</html>

@@ -1,0 +1,35 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>BridgingExplorationTool</title>
+	<link rel="stylesheet" href="styles.css">
+	<script type="text/javascript">
+	var COLORS = ["#8cffd8", "#FF7F50", "#6495ED", "#BDB76B", "#DDA0DD", "#FF69B4", "#FFD700", "#F5DEB3"];
+	var PREPS = ['of', 'in', 'to', 'for', 'with', 'on', 'at', 'from', 'by', 'about', 'over', 'between', 'against', 'under', 'among', 'before', 'after'];
+	var IDX = 395;
+	var HIT_ID = 60998;
+	var BRIDGING_RESULTS_UNFOLDED = [{'bridge': 0, 'complement': 3, 'preposition': 'by', 'coref_cluster': 3}, {'bridge': 0, 'complement': 4, 'preposition': 'by', 'coref_cluster': 3}, {'bridge': 0, 'complement': 10, 'preposition': 'by', 'coref_cluster': 3}, {'bridge': 0, 'complement': 18, 'preposition': 'by', 'coref_cluster': 3}, {'bridge': 0, 'complement': 23, 'preposition': 'by', 'coref_cluster': 3}, {'bridge': 0, 'complement': 2, 'preposition': 'about', 'coref_cluster': 2}, {'bridge': 0, 'complement': 1, 'preposition': 'about', 'coref_cluster': 1}, {'bridge': 3, 'complement': 0, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 8, 'complement': 9, 'preposition': 'in', 'coref_cluster': 6}, {'bridge': 8, 'complement': 16, 'preposition': 'of', 'coref_cluster': 4}, {'bridge': 8, 'complement': 5, 'preposition': 'of', 'coref_cluster': 4}, {'bridge': 8, 'complement': 6, 'preposition': 'of', 'coref_cluster': 4}, {'bridge': 8, 'complement': 7, 'preposition': 'of', 'coref_cluster': 4}, {'bridge': 9, 'complement': 16, 'preposition': 'of', 'coref_cluster': 4}, {'bridge': 9, 'complement': 5, 'preposition': 'of', 'coref_cluster': 4}, {'bridge': 9, 'complement': 6, 'preposition': 'of', 'coref_cluster': 4}, {'bridge': 9, 'complement': 7, 'preposition': 'of', 'coref_cluster': 4}, {'bridge': 12, 'complement': 15, 'preposition': 'for', 'coref_cluster': 9}, {'bridge': 12, 'complement': 13, 'preposition': 'of', 'coref_cluster': 8}, {'bridge': 14, 'complement': 15, 'preposition': 'for', 'coref_cluster': 9}, {'bridge': 14, 'complement': 13, 'preposition': 'of', 'coref_cluster': 8}, {'bridge': 15, 'complement': 9, 'preposition': 'of', 'coref_cluster': 6}, {'bridge': 20, 'complement': 13, 'preposition': 'on', 'coref_cluster': 8}, {'bridge': 22, 'complement': 13, 'preposition': 'of', 'coref_cluster': 8}];
+	var CURR_SPLIT_HIT_IDS = []
+	var BRIDGING_RESULTS = [];
+	var text = {'raw_text': 'YSK: "Payed" is a nautical term. "Paid" is the financial term. Author: AfterReview samx3i: "I\'d know this if I payed attention in school."  AfterReview: "Is "attention" the name of a sailboat?  That\'s an awesome name for a schools boat!"  samx3i: "It was, but it went missing, resulting in Attention deficit disorder."  AfterReview: "Damn...they should\'ve used MEDS.  Marine Extrapolation &amp; Discovery System"  squarepeg0000: "Thank you! I\'m amazed how often I see payed misused. " ', 'title': {'start_index': 0, 'end_index': 62}, 'subtitles': [{'start_index': 63, 'end_index': 82, 'id': 0}], 'paragraphs': [{'start_index': 83, 'end_index': 139, 'id': 0}, {'start_index': 140, 'end_index': 238, 'id': 1}, {'start_index': 239, 'end_index': 319, 'id': 2}, {'start_index': 320, 'end_index': 413, 'id': 3}, {'start_index': 414, 'end_index': 485, 'id': 4}], 'indents': [0, 1, 2, 3, 0], 'paragraph_authors': ['samx3i', 'AfterReview', 'samx3i', 'AfterReview', 'squarepeg0000']};
+	var nps = [{'start_index': 0, 'text': 'YSK', 'end_index': 3, 'id': 0}, {'start_index': 16, 'text': 'a nautical term', 'end_index': 31, 'id': 1}, {'start_index': 43, 'text': 'the financial term', 'end_index': 61, 'id': 2}, {'start_index': 63, 'text': 'Author', 'end_index': 69, 'id': 3}, {'start_index': 71, 'text': 'AfterReview', 'end_index': 82, 'id': 4}, {'start_index': 83, 'text': 'samx3i', 'end_index': 89, 'id': 5}, {'start_index': 92, 'text': 'I', 'end_index': 93, 'id': 6}, {'start_index': 109, 'text': 'I', 'end_index': 110, 'id': 7}, {'start_index': 117, 'text': 'attention', 'end_index': 126, 'id': 8}, {'start_index': 130, 'text': 'school', 'end_index': 136, 'id': 9}, {'start_index': 140, 'text': 'AfterReview', 'end_index': 151, 'id': 10}, {'start_index': 158, 'text': 'attention', 'end_index': 167, 'id': 11}, {'start_index': 169, 'text': 'the name', 'end_index': 177, 'id': 12}, {'start_index': 181, 'text': 'a sailboat', 'end_index': 191, 'id': 13}, {'start_index': 201, 'text': 'an awesome name', 'end_index': 216, 'id': 14}, {'start_index': 221, 'text': 'a schools boat', 'end_index': 235, 'id': 15}, {'start_index': 239, 'text': 'samx3i', 'end_index': 245, 'id': 16}, {'start_index': 290, 'text': 'Attention deficit disorder', 'end_index': 316, 'id': 17}, {'start_index': 320, 'text': 'AfterReview', 'end_index': 331, 'id': 18}, {'start_index': 341, 'text': 'they', 'end_index': 345, 'id': 19}, {'start_index': 361, 'text': 'MEDS', 'end_index': 365, 'id': 20}, {'start_index': 368, 'text': 'Marine Extrapolation &amp', 'end_index': 393, 'id': 21}, {'start_index': 395, 'text': 'Discovery System', 'end_index': 411, 'id': 22}, {'start_index': 436, 'text': 'you', 'end_index': 439, 'id': 23}, {'start_index': 441, 'text': 'I', 'end_index': 442, 'id': 24}, {'start_index': 462, 'text': 'I', 'end_index': 463, 'id': 25}];
+	var coref = [{'id': 0, 'members': [0]}, {'id': 1, 'members': [1]}, {'id': 2, 'members': [2]}, {'id': 3, 'members': [3, 4, 10, 18, 23]}, {'id': 4, 'members': [16, 5, 6, 7]}, {'id': 5, 'members': [8, 11]}, {'id': 6, 'members': [9]}, {'id': 7, 'members': [12, 14]}, {'id': 8, 'members': [13]}, {'id': 9, 'members': [15]}, {'id': 10, 'members': [17]}, {'id': 11, 'members': [19]}, {'id': 12, 'members': [20]}, {'id': 13, 'members': [21]}, {'id': 14, 'members': [22]}, {'id': 15, 'members': [24, 25]}];
+	var bridges = [];
+	var current_np_id = 0;
+	var url = 'N/A';
+	</script>
+	<script src='ood_ids.js'></script>
+	<script src='bridging_exploration.js'></script>
+	<script src="https://cdn.jsdelivr.net/npm/ractive"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
+</head>
+
+<body>
+<div id="page">
+	<script src='data_init.js'></script>
+</div>	
+</body>
+
+
+</html>

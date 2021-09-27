@@ -1,0 +1,35 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>BridgingExplorationTool</title>
+	<link rel="stylesheet" href="styles.css">
+	<script type="text/javascript">
+	var COLORS = ["#8cffd8", "#FF7F50", "#6495ED", "#BDB76B", "#DDA0DD", "#FF69B4", "#FFD700", "#F5DEB3"];
+	var PREPS = ['of', 'in', 'to', 'for', 'with', 'on', 'at', 'from', 'by', 'about', 'over', 'between', 'against', 'under', 'among', 'before', 'after'];
+	var IDX = 269;
+	var HIT_ID = 50061;
+	var BRIDGING_RESULTS_UNFOLDED = [{'bridge': 0, 'complement': 1, 'preposition': 'by', 'coref_cluster': 1}, {'bridge': 5, 'complement': 1, 'preposition': 'of', 'coref_cluster': 1}, {'bridge': 10, 'complement': 27, 'preposition': 'about', 'coref_cluster': 14}, {'bridge': 10, 'complement': 1, 'preposition': 'by', 'coref_cluster': 1}, {'bridge': 10, 'complement': 1, 'preposition': 'of', 'coref_cluster': 1}, {'bridge': 15, 'complement': 1, 'preposition': 'by', 'coref_cluster': 1}, {'bridge': 15, 'complement': 27, 'preposition': 'about', 'coref_cluster': 14}, {'bridge': 20, 'complement': 1, 'preposition': 'of', 'coref_cluster': 1}, {'bridge': 20, 'complement': 27, 'preposition': 'about', 'coref_cluster': 14}, {'bridge': 21, 'complement': 1, 'preposition': 'by', 'coref_cluster': 1}, {'bridge': 22, 'complement': 0, 'preposition': 'in', 'coref_cluster': 0}, {'bridge': 22, 'complement': 10, 'preposition': 'in', 'coref_cluster': 0}, {'bridge': 22, 'complement': 20, 'preposition': 'in', 'coref_cluster': 0}, {'bridge': 22, 'complement': 15, 'preposition': 'in', 'coref_cluster': 0}, {'bridge': 22, 'complement': 21, 'preposition': 'in', 'coref_cluster': 0}, {'bridge': 22, 'complement': 0, 'preposition': 'from', 'coref_cluster': 0}, {'bridge': 22, 'complement': 10, 'preposition': 'from', 'coref_cluster': 0}, {'bridge': 22, 'complement': 20, 'preposition': 'from', 'coref_cluster': 0}, {'bridge': 22, 'complement': 15, 'preposition': 'from', 'coref_cluster': 0}, {'bridge': 22, 'complement': 21, 'preposition': 'from', 'coref_cluster': 0}, {'bridge': 22, 'complement': 5, 'preposition': 'from', 'coref_cluster': 4}, {'bridge': 23, 'complement': 24, 'preposition': 'of', 'coref_cluster': 11}, {'bridge': 26, 'complement': 27, 'preposition': 'of', 'coref_cluster': 14}, {'bridge': 26, 'complement': 25, 'preposition': 'for', 'coref_cluster': 12}, {'bridge': 26, 'complement': 5, 'preposition': 'from', 'coref_cluster': 4}, {'bridge': 26, 'complement': 0, 'preposition': 'from', 'coref_cluster': 0}, {'bridge': 26, 'complement': 10, 'preposition': 'from', 'coref_cluster': 0}, {'bridge': 26, 'complement': 20, 'preposition': 'from', 'coref_cluster': 0}, {'bridge': 26, 'complement': 15, 'preposition': 'from', 'coref_cluster': 0}, {'bridge': 26, 'complement': 21, 'preposition': 'from', 'coref_cluster': 0}, {'bridge': 27, 'complement': 26, 'preposition': 'in', 'coref_cluster': 13}];
+	var CURR_SPLIT_HIT_IDS = []
+	var BRIDGING_RESULTS = [];
+	var text = {'raw_text': 'CLEOPATRA by H. Rider Haggard DEDICATION My dear Mother, I have for a long while hoped to be allowed to dedicate some book of mine to you, and now I bring you this work, because whatever its shortcomings, and whatever judgment may be passed upon it by yourself and others, it is yet the one I should wish you to accept. I trust that you will receive from my romance of "Cleopatra" some such pleasure as lightened the labour of its building up; and that it may convey to your mind a picture, however imperfect, of the old and mysterious Egypt in whose lost glories you are so deeply interested.', 'title': {'start_index': 0, 'end_index': 9}, 'subtitles': [{'start_index': 10, 'end_index': 29, 'id': 0}, {'start_index': 30, 'end_index': 40, 'id': 1}], 'paragraphs': [{'start_index': 41, 'end_index': 56, 'id': 0}, {'start_index': 57, 'end_index': 319, 'id': 1}, {'start_index': 320, 'end_index': 593, 'id': 2}]};
+	var nps = [{'start_index': 0, 'text': 'CLEOPATRA', 'end_index': 9, 'id': 0}, {'start_index': 13, 'text': 'H. Rider', 'end_index': 21, 'id': 1}, {'start_index': 22, 'text': 'Haggard', 'end_index': 29, 'id': 2}, {'end_index': 40, 'start_index': 30, 'text': 'DEDICATION', 'id': 3}, {'start_index': 57, 'text': 'I', 'end_index': 58, 'id': 4}, {'start_index': 113, 'text': 'some book', 'end_index': 122, 'id': 5}, {'start_index': 126, 'text': 'mine', 'end_index': 130, 'id': 6}, {'start_index': 134, 'text': 'you', 'end_index': 137, 'id': 7}, {'start_index': 147, 'text': 'I', 'end_index': 148, 'id': 8}, {'start_index': 155, 'text': 'you', 'end_index': 158, 'id': 9}, {'start_index': 159, 'text': 'this work', 'end_index': 168, 'id': 10}, {'start_index': 178, 'text': 'whatever its shortcomings', 'end_index': 203, 'id': 11}, {'start_index': 209, 'text': 'whatever judgment', 'end_index': 226, 'id': 12}, {'start_index': 252, 'text': 'yourself', 'end_index': 260, 'id': 13}, {'start_index': 265, 'text': 'others', 'end_index': 271, 'id': 14}, {'start_index': 283, 'text': 'the one', 'end_index': 290, 'id': 15}, {'start_index': 291, 'text': 'I', 'end_index': 292, 'id': 16}, {'start_index': 305, 'text': 'you', 'end_index': 308, 'id': 17}, {'start_index': 320, 'text': 'I', 'end_index': 321, 'id': 18}, {'start_index': 333, 'text': 'you', 'end_index': 336, 'id': 19}, {'start_index': 355, 'text': 'my romance', 'end_index': 365, 'id': 20}, {'start_index': 370, 'text': 'Cleopatra', 'end_index': 379, 'id': 21}, {'start_index': 381, 'text': 'some such pleasure', 'end_index': 399, 'id': 22}, {'start_index': 413, 'text': 'the labour', 'end_index': 423, 'id': 23}, {'start_index': 427, 'text': 'its building', 'end_index': 439, 'id': 24}, {'start_index': 470, 'text': 'your mind', 'end_index': 479, 'id': 25}, {'start_index': 480, 'text': 'a picture', 'end_index': 489, 'id': 26}, {'start_index': 513, 'text': 'the old and mysterious Egypt', 'end_index': 541, 'id': 27}, {'start_index': 545, 'text': 'whose lost glories', 'end_index': 563, 'id': 28}, {'start_index': 564, 'text': 'you', 'end_index': 567, 'id': 29}];
+	var coref = [{'id': 0, 'members': [0, 10, 20, 15, 21]}, {'id': 1, 'members': [1]}, {'id': 2, 'members': [2]}, {'id': 3, 'members': [4, 6, 8, 16, 18]}, {'id': 4, 'members': [5]}, {'id': 5, 'members': [7, 9, 13, 17, 19, 29]}, {'id': 6, 'members': [11]}, {'id': 7, 'members': [12]}, {'id': 8, 'members': [14]}, {'id': 9, 'members': [22]}, {'id': 10, 'members': [23]}, {'id': 11, 'members': [24]}, {'id': 12, 'members': [25]}, {'id': 13, 'members': [26]}, {'id': 14, 'members': [27]}, {'id': 15, 'members': [28]}, {'id': 16, 'members': [3]}];
+	var bridges = [];
+	var current_np_id = 0;
+	var url = 'N/A';
+	</script>
+	<script src='ood_ids.js'></script>
+	<script src='bridging_exploration.js'></script>
+	<script src="https://cdn.jsdelivr.net/npm/ractive"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
+</head>
+
+<body>
+<div id="page">
+	<script src='data_init.js'></script>
+</div>	
+</body>
+
+
+</html>

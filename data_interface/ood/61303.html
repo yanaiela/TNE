@@ -1,0 +1,35 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>BridgingExplorationTool</title>
+	<link rel="stylesheet" href="styles.css">
+	<script type="text/javascript">
+	var COLORS = ["#8cffd8", "#FF7F50", "#6495ED", "#BDB76B", "#DDA0DD", "#FF69B4", "#FFD700", "#F5DEB3"];
+	var PREPS = ['of', 'in', 'to', 'for', 'with', 'on', 'at', 'from', 'by', 'about', 'over', 'between', 'against', 'under', 'among', 'before', 'after'];
+	var IDX = 452;
+	var HIT_ID = 61303;
+	var BRIDGING_RESULTS_UNFOLDED = [{'bridge': 0, 'complement': 3, 'preposition': 'by', 'coref_cluster': 2}, {'bridge': 0, 'complement': 2, 'preposition': 'by', 'coref_cluster': 2}, {'bridge': 0, 'complement': 19, 'preposition': 'by', 'coref_cluster': 2}, {'bridge': 0, 'complement': 1, 'preposition': 'about', 'coref_cluster': 1}, {'bridge': 0, 'complement': 21, 'preposition': 'about', 'coref_cluster': 1}, {'bridge': 0, 'complement': 15, 'preposition': 'about', 'coref_cluster': 1}, {'bridge': 1, 'complement': 20, 'preposition': 'member(s) of', 'coref_cluster': 14}, {'bridge': 1, 'complement': 6, 'preposition': 'member(s) of', 'coref_cluster': 5}, {'bridge': 2, 'complement': 25, 'preposition': 'of', 'coref_cluster': 17}, {'bridge': 2, 'complement': 0, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 7, 'complement': 10, 'preposition': 'for', 'coref_cluster': 8}, {'bridge': 9, 'complement': 10, 'preposition': 'for', 'coref_cluster': 8}, {'bridge': 10, 'complement': 6, 'preposition': 'member(s) of', 'coref_cluster': 5}, {'bridge': 11, 'complement': 17, 'preposition': 'member(s) of', 'coref_cluster': 12}, {'bridge': 15, 'complement': 20, 'preposition': 'member(s) of', 'coref_cluster': 14}, {'bridge': 15, 'complement': 6, 'preposition': 'member(s) of', 'coref_cluster': 5}, {'bridge': 17, 'complement': 24, 'preposition': 'of', 'coref_cluster': 9}, {'bridge': 17, 'complement': 11, 'preposition': 'of', 'coref_cluster': 9}, {'bridge': 17, 'complement': 13, 'preposition': 'of', 'coref_cluster': 9}, {'bridge': 17, 'complement': 14, 'preposition': 'of', 'coref_cluster': 9}, {'bridge': 18, 'complement': 17, 'preposition': 'for', 'coref_cluster': 12}, {'bridge': 18, 'complement': 24, 'preposition': 'for', 'coref_cluster': 9}, {'bridge': 18, 'complement': 11, 'preposition': 'for', 'coref_cluster': 9}, {'bridge': 18, 'complement': 13, 'preposition': 'for', 'coref_cluster': 9}, {'bridge': 18, 'complement': 14, 'preposition': 'for', 'coref_cluster': 9}, {'bridge': 18, 'complement': 1, 'preposition': 'from', 'coref_cluster': 1}, {'bridge': 18, 'complement': 21, 'preposition': 'from', 'coref_cluster': 1}, {'bridge': 18, 'complement': 15, 'preposition': 'from', 'coref_cluster': 1}, {'bridge': 20, 'complement': 24, 'preposition': 'of', 'coref_cluster': 9}, {'bridge': 20, 'complement': 11, 'preposition': 'of', 'coref_cluster': 9}, {'bridge': 20, 'complement': 13, 'preposition': 'of', 'coref_cluster': 9}, {'bridge': 20, 'complement': 14, 'preposition': 'of', 'coref_cluster': 9}, {'bridge': 20, 'complement': 6, 'preposition': 'member(s) of', 'coref_cluster': 5}, {'bridge': 21, 'complement': 20, 'preposition': 'member(s) of', 'coref_cluster': 14}, {'bridge': 21, 'complement': 6, 'preposition': 'member(s) of', 'coref_cluster': 5}];
+	var CURR_SPLIT_HIT_IDS = []
+	var BRIDGING_RESULTS = [];
+	var text = {'raw_text': 'LPT How to microwave leftover rice Author: Makasuro peon2: "Also LPT: If you want to reheat food, never use max power. Always go longer on power 5-7. Full power is for heating up frozen foods."  pgliver: "But the internet tells me if I reheat rice that everyone in my household will die a terrible death?"  Makasuro: "Just make sure to refrigerate any left overs, and not reheat left over rice that has been left out for a while. "  molko123: "Who do you want to believe? " ', 'title': {'start_index': 0, 'end_index': 34}, 'subtitles': [{'start_index': 35, 'end_index': 51, 'id': 0}], 'paragraphs': [{'start_index': 52, 'end_index': 194, 'id': 0}, {'start_index': 195, 'end_index': 306, 'id': 1}, {'start_index': 307, 'end_index': 432, 'id': 2}, {'start_index': 433, 'end_index': 474, 'id': 3}], 'indents': [0, 0, 1, 1], 'paragraph_authors': ['peon2', 'pgliver', 'Makasuro', 'molko123']};
+	var nps = [{'start_index': 0, 'text': 'LPT', 'end_index': 3, 'id': 0}, {'start_index': 21, 'text': 'leftover rice', 'end_index': 34, 'id': 1}, {'start_index': 35, 'text': 'Author', 'end_index': 41, 'id': 2}, {'start_index': 43, 'text': 'Makasuro', 'end_index': 51, 'id': 3}, {'start_index': 52, 'text': 'peon2', 'end_index': 57, 'id': 4}, {'start_index': 73, 'text': 'you', 'end_index': 76, 'id': 5}, {'start_index': 92, 'text': 'food', 'end_index': 96, 'id': 6}, {'start_index': 108, 'text': 'max power', 'end_index': 117, 'id': 7}, {'start_index': 139, 'text': 'power', 'end_index': 144, 'id': 8}, {'start_index': 150, 'text': 'Full power', 'end_index': 160, 'id': 9}, {'start_index': 179, 'text': 'frozen foods', 'end_index': 191, 'id': 10}, {'start_index': 195, 'text': 'pgliver', 'end_index': 202, 'id': 11}, {'start_index': 209, 'text': 'the internet', 'end_index': 221, 'id': 12}, {'start_index': 228, 'text': 'me', 'end_index': 230, 'id': 13}, {'start_index': 234, 'text': 'I', 'end_index': 235, 'id': 14}, {'start_index': 243, 'text': 'rice', 'end_index': 247, 'id': 15}, {'start_index': 253, 'text': 'everyone', 'end_index': 261, 'id': 16}, {'start_index': 265, 'text': 'my household', 'end_index': 277, 'id': 17}, {'start_index': 287, 'text': 'a terrible death', 'end_index': 303, 'id': 18}, {'start_index': 307, 'text': 'Makasuro', 'end_index': 315, 'id': 19}, {'start_index': 348, 'text': 'any left overs', 'end_index': 362, 'id': 20}, {'start_index': 389, 'text': 'rice', 'end_index': 393, 'id': 21}, {'start_index': 421, 'text': 'a while', 'end_index': 428, 'id': 22}, {'start_index': 433, 'text': 'molko123', 'end_index': 441, 'id': 23}, {'start_index': 451, 'text': 'you', 'end_index': 454, 'id': 24}, {'end_index': 34, 'start_index': 0, 'text': 'LPT How to microwave leftover rice', 'id': 25}];
+	var coref = [{'id': 0, 'members': [0]}, {'id': 1, 'members': [1, 21, 15]}, {'id': 2, 'members': [3, 2, 19]}, {'id': 3, 'members': [4]}, {'id': 4, 'members': [5]}, {'id': 5, 'members': [6]}, {'id': 6, 'members': [9, 7]}, {'id': 7, 'members': [8]}, {'id': 8, 'members': [10]}, {'id': 9, 'members': [24, 11, 13, 14]}, {'id': 10, 'members': [12]}, {'id': 11, 'members': [16]}, {'id': 12, 'members': [17]}, {'id': 13, 'members': [18]}, {'id': 14, 'members': [20]}, {'id': 15, 'members': [22]}, {'id': 16, 'members': [23]}, {'id': 17, 'members': [25]}];
+	var bridges = [];
+	var current_np_id = 0;
+	var url = 'N/A';
+	</script>
+	<script src='ood_ids.js'></script>
+	<script src='bridging_exploration.js'></script>
+	<script src="https://cdn.jsdelivr.net/npm/ractive"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
+</head>
+
+<body>
+<div id="page">
+	<script src='data_init.js'></script>
+</div>	
+</body>
+
+
+</html>

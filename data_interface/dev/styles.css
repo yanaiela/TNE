@@ -1,0 +1,151 @@
+C* {
+      box-sizing: border-box;
+      }
+      body {
+      font-family: Arial, Helvetica, sans-serif;
+      zoom: 90%;
+      width: 100%;
+      margin:0; 
+      padding:0
+      height:100%; 
+      }
+      .container { position:fixed; width:50%;}
+      #top_l { top:0;   left:0;  bottom:50%;width:60%;}
+      #top_r { top:0;   left:60%; bottom:50%; width:40%; }
+      #mid_l { top:50%; left:0;   bottom:12%; width:60%; }		
+      #mid_r { top:50%; left:60%; bottom:0; width:40%;}
+      #bottom_l	{ top:88%; left:0; bottom:0; width:60%;}		
+      #bottom_r { top:100%; left:60%; bottom:0; width:40%;}
+      h2{
+      margin-top:10;
+      margin-bottom:10;
+      }
+      h3{
+      margin-top:0;
+      margin-bottom:0;
+      }
+      article {            
+      width: 95%;
+      height: 85%;
+      overflow-y: scroll;
+      background-color: #f1f1f1;
+      border: 1px solid black;
+      border-radius: 5px;
+      margin: 10px;  
+      margin-left: 15px;   
+      pointer-events: auto;
+      padding: 10px;	
+      }        
+      #items {
+      width: 95%;
+      height: 86%;
+      margin: 10px;            
+      pointer-events: auto;
+      padding: 10px;  
+      }
+      #item_pane {
+      height: 85%;
+      overflow-y: scroll;
+      }
+      #entities {
+      padding: 10px;			
+      margin:10px;
+      padding-top: 0;	
+      height: 85%; 
+      max-height: inherit;
+      max-width: inherit;				
+      width: 95%; 
+      pointer-events: auto;
+      }
+      #entity_pane {
+      height: 95%;			
+      overflow-y: scroll;
+      }
+      #links {
+      padding: 10px;			
+      margin:10px;
+      padding-top: 0;	
+      margin-top: 0;	
+      height: 0%;            
+      width: 95%; 
+      pointer-events: auto;
+      }
+      #lnks {
+      height: 0%;
+      overflow-y: scroll;
+      }
+      #options_pane { 
+      padding: 10px;			
+      margin:10px;
+      margin-left: 15px;  
+      height: 85%;  
+      max-height: inherit;
+      max-width: inherit;	
+      width: 95%;            
+      border: 1px solid black;
+      border-radius: 5px;            
+      pointer-events: auto;
+      overflow-y: scroll;	
+      }
+      #button{			
+      padding: 10px;
+      padding-left: 15px;  	
+      padding-top: 0;	
+      pointer-events: auto;
+      }
+      #cur_NP {
+      background-color: yellow;
+      font-weight: bold;
+      }
+      #next{
+      width: 20%;
+      height: 40px;
+      margin-top: 15px;
+      
+      }
+	  #indexbox{
+	  margin-left:25%;
+      width: 10%;
+      height: 40px;
+      margin-top: 7.5px;
+	  text-align: center; 	  
+      }
+      #prev{
+      width: 20%;
+      height: 40px;
+      margin-top:0;
+      
+      }
+      #next,
+      #prev,
+	  #indexbox,
+	  #range{
+      display:inline;
+      }
+	 .btn{display:inline-block;margin-bottom:0;font-weight:400;text-align:center;white-space:nowrap;vertical-align:middle;-ms-touch-action:manipulation;touch-action:manipulation;cursor:pointer;background-image:none;border:1px solid transparent;padding:6px 12px;font-size:14px;line-height:1.42857143;border-radius:4px;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+     .btn-primary{color:#fff;background-color:#007bff;border-color:#007bff}.btn-primary:hover{color:#fff;background-color:#0069d9;border-color:#0062cc}.btn-primary.focus,.btn-primary:focus{box-shadow:0 0 0 .2rem rgba(0,123,255,.5)}.btn-primary.disabled,.btn-primary:disabled{color:#fff;background-color:#007bff;border-color:#007bff}.btn-primary:not(:disabled):not(.disabled).active,.btn-primary:not(:disabled):not(.disabled):active,.show>.btn-primary.dropdown-toggle{color:#fff;background-color:#0062cc;border-color:#005cbf}.btn-primary:not(:disabled):not(.disabled).active:focus,.btn-primary:not(:disabled):not(.disabled):active:focus,.show>.btn-primary.dropdown-toggle:focus{box-shadow:0 0 0 .2rem rgba(0,123,255,.5)}
+	 .item {
+      border:1px solid;
+      border-radius:6px;
+      padding:1px;
+      margin:2px;
+      line-height: 16pt;	
+      display: inline-block;
+      }
+      .outer li:before {
+      content: "";
+      margin-left: -0.5rem;
+      }
+      .inner li:before {
+      content: "";
+      margin-left: -1.5rem;
+      }
+      input[type=radio], 
+      input[type=checkbox],  input[type=button]{
+      cursor: pointer; 
+      }
+	  .button:disabled{
+	  background-color:lightgray;
+	  border-color:lightgray;s
+	  }
+      

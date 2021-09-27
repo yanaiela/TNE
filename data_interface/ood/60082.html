@@ -1,0 +1,35 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>BridgingExplorationTool</title>
+	<link rel="stylesheet" href="styles.css">
+	<script type="text/javascript">
+	var COLORS = ["#8cffd8", "#FF7F50", "#6495ED", "#BDB76B", "#DDA0DD", "#FF69B4", "#FFD700", "#F5DEB3"];
+	var PREPS = ['of', 'in', 'to', 'for', 'with', 'on', 'at', 'from', 'by', 'about', 'over', 'between', 'against', 'under', 'among', 'before', 'after'];
+	var IDX = 361;
+	var HIT_ID = 60082;
+	var BRIDGING_RESULTS_UNFOLDED = [{'bridge': 0, 'complement': 1, 'preposition': 'by', 'coref_cluster': 1}, {'bridge': 0, 'complement': 20, 'preposition': 'by', 'coref_cluster': 1}, {'bridge': 0, 'complement': 21, 'preposition': 'by', 'coref_cluster': 1}, {'bridge': 0, 'complement': 7, 'preposition': 'by', 'coref_cluster': 1}, {'bridge': 0, 'complement': 8, 'preposition': 'by', 'coref_cluster': 1}, {'bridge': 0, 'complement': 2, 'preposition': 'by', 'coref_cluster': 1}, {'bridge': 1, 'complement': 0, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 12, 'complement': 17, 'preposition': 'of', 'coref_cluster': 10}, {'bridge': 12, 'complement': 18, 'preposition': 'of', 'coref_cluster': 10}, {'bridge': 12, 'complement': 15, 'preposition': 'of', 'coref_cluster': 10}, {'bridge': 12, 'complement': 23, 'preposition': 'of', 'coref_cluster': 14}, {'bridge': 13, 'complement': 17, 'preposition': 'of', 'coref_cluster': 10}, {'bridge': 13, 'complement': 18, 'preposition': 'of', 'coref_cluster': 10}, {'bridge': 13, 'complement': 15, 'preposition': 'of', 'coref_cluster': 10}, {'bridge': 13, 'complement': 23, 'preposition': 'of', 'coref_cluster': 14}, {'bridge': 14, 'complement': 19, 'preposition': 'of', 'coref_cluster': 7}, {'bridge': 14, 'complement': 12, 'preposition': 'of', 'coref_cluster': 7}, {'bridge': 16, 'complement': 19, 'preposition': 'of', 'coref_cluster': 7}, {'bridge': 16, 'complement': 12, 'preposition': 'of', 'coref_cluster': 7}];
+	var CURR_SPLIT_HIT_IDS = []
+	var BRIDGING_RESULTS = [];
+	var text = {'raw_text': 'Progress! Author: Placebo_Plex iHaveAgency: "Obligatory: Thinking of telling your parents? [Read this first](https://www.reddit.com/r/atheism/wiki/comingout).  Just be careful you don\'t push it too far, if you are dependent on them for anything."  over-the-fence: "Congrats on that, but be careful. My parents pretend to "accept" my ways but will still find ways to coerce me into religion (even though Im an adult who does not live with them). "  Placebo_Plex: "Thanks! I\'ll keep a look out" ', 'title': {'start_index': 0, 'end_index': 9}, 'subtitles': [{'start_index': 10, 'end_index': 30, 'id': 0}], 'paragraphs': [{'start_index': 31, 'end_index': 247, 'id': 0}, {'start_index': 248, 'end_index': 447, 'id': 1}, {'start_index': 448, 'end_index': 493, 'id': 2}], 'indents': [0, 0, 1], 'paragraph_authors': ['iHaveAgency', 'over-the-fence', 'Placebo_Plex']};
+	var nps = [{'start_index': 0, 'text': 'Progress', 'end_index': 8, 'id': 0}, {'start_index': 10, 'text': 'Author', 'end_index': 16, 'id': 1}, {'start_index': 18, 'text': 'Placebo_Plex', 'end_index': 30, 'id': 2}, {'end_index': 42, 'start_index': 31, 'text': 'iHaveAgency', 'id': 3}, {'start_index': 45, 'text': 'Obligatory', 'end_index': 55, 'id': 4}, {'start_index': 77, 'text': 'your parents', 'end_index': 89, 'id': 5}, {'start_index': 97, 'text': 'this first](https://www.reddit.com/r/atheism/wiki/comingout', 'end_index': 156, 'id': 6}, {'start_index': 176, 'text': 'you', 'end_index': 179, 'id': 7}, {'start_index': 206, 'text': 'you', 'end_index': 209, 'id': 8}, {'start_index': 227, 'text': 'them', 'end_index': 231, 'id': 9}, {'start_index': 236, 'text': 'anything', 'end_index': 244, 'id': 10}, {'start_index': 253, 'text': 'the-fence', 'end_index': 262, 'id': 11}, {'start_index': 299, 'text': 'My parents', 'end_index': 309, 'id': 12}, {'start_index': 330, 'text': 'my ways', 'end_index': 337, 'id': 13}, {'start_index': 358, 'text': 'ways', 'end_index': 362, 'id': 14}, {'start_index': 373, 'text': 'me', 'end_index': 375, 'id': 15}, {'start_index': 381, 'text': 'religion', 'end_index': 389, 'id': 16}, {'start_index': 403, 'text': 'I', 'end_index': 404, 'id': 17}, {'start_index': 406, 'text': 'an adult', 'end_index': 414, 'id': 18}, {'start_index': 438, 'text': 'them', 'end_index': 442, 'id': 19}, {'start_index': 448, 'text': 'Placebo_Plex', 'end_index': 460, 'id': 20}, {'start_index': 471, 'text': 'I', 'end_index': 472, 'id': 21}, {'start_index': 481, 'text': 'a look', 'end_index': 487, 'id': 22}, {'end_index': 262, 'start_index': 248, 'text': 'over-the-fence', 'id': 23}];
+	var coref = [{'id': 0, 'members': [0]}, {'id': 1, 'members': [1, 20, 21, 7, 8, 2]}, {'id': 2, 'members': [4]}, {'id': 3, 'members': [9, 5]}, {'id': 4, 'members': [6]}, {'id': 5, 'members': [10]}, {'id': 6, 'members': [11]}, {'id': 7, 'members': [19, 12]}, {'id': 8, 'members': [13]}, {'id': 9, 'members': [14]}, {'id': 10, 'members': [17, 18, 15]}, {'id': 11, 'members': [16]}, {'id': 12, 'members': [22]}, {'id': 13, 'members': [3]}, {'id': 14, 'members': [23]}];
+	var bridges = [];
+	var current_np_id = 0;
+	var url = 'N/A';
+	</script>
+	<script src='ood_ids.js'></script>
+	<script src='bridging_exploration.js'></script>
+	<script src="https://cdn.jsdelivr.net/npm/ractive"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
+</head>
+
+<body>
+<div id="page">
+	<script src='data_init.js'></script>
+</div>	
+</body>
+
+
+</html>

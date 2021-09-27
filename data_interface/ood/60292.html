@@ -1,0 +1,35 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>BridgingExplorationTool</title>
+	<link rel="stylesheet" href="styles.css">
+	<script type="text/javascript">
+	var COLORS = ["#8cffd8", "#FF7F50", "#6495ED", "#BDB76B", "#DDA0DD", "#FF69B4", "#FFD700", "#F5DEB3"];
+	var PREPS = ['of', 'in', 'to', 'for', 'with', 'on', 'at', 'from', 'by', 'about', 'over', 'between', 'against', 'under', 'among', 'before', 'after'];
+	var IDX = 347;
+	var HIT_ID = 60292;
+	var BRIDGING_RESULTS_UNFOLDED = [{'bridge': 7, 'complement': 3, 'preposition': 'for', 'coref_cluster': 2}, {'bridge': 7, 'complement': 11, 'preposition': 'for', 'coref_cluster': 2}, {'bridge': 7, 'complement': 19, 'preposition': 'for', 'coref_cluster': 2}, {'bridge': 9, 'complement': 10, 'preposition': 'to', 'coref_cluster': 9}, {'bridge': 15, 'complement': 12, 'preposition': 'for', 'coref_cluster': 17}];
+	var CURR_SPLIT_HIT_IDS = []
+	var BRIDGING_RESULTS = [];
+	var text = {'raw_text': 'Here we are again Author: Solark42 ArielleAfterDark: "You know what helps me?  The song " Don\'t worry, be happy".  Best of luck. "  exanimationes_incida: "the unescapable garden loop... probably the closest thing to a living hell."  Solark42: "Yes exactly "  Rocketman1800: "Hm I wish I had meds for this but I need someone to talk to so just hit me up if u feel like it I just want to be distracted from everything for a while..." ', 'title': {'start_index': 0, 'end_index': 17}, 'subtitles': [{'start_index': 18, 'end_index': 34, 'id': 0}], 'paragraphs': [{'start_index': 35, 'end_index': 131, 'id': 0}, {'start_index': 132, 'end_index': 232, 'id': 1}, {'start_index': 233, 'end_index': 258, 'id': 2}, {'start_index': 259, 'end_index': 432, 'id': 3}], 'indents': [0, 0, 1, 0], 'paragraph_authors': ['ArielleAfterDark', 'exanimationes_incida', 'Solark42', 'Rocketman1800']};
+	var nps = [{'start_index': 5, 'text': 'we', 'end_index': 7, 'id': 0}, {'start_index': 18, 'text': 'Author: Solark42', 'end_index': 34, 'id': 1}, {'end_index': 51, 'start_index': 35, 'text': 'ArielleAfterDark', 'id': 2}, {'start_index': 54, 'text': 'You', 'end_index': 57, 'id': 3}, {'start_index': 63, 'text': 'what', 'end_index': 67, 'id': 4}, {'start_index': 74, 'text': 'me', 'end_index': 76, 'id': 5}, {'start_index': 79, 'text': 'The song', 'end_index': 87, 'id': 6}, {'start_index': 123, 'text': 'luck', 'end_index': 127, 'id': 7}, {'start_index': 155, 'text': 'the unescapable garden loop', 'end_index': 182, 'id': 8}, {'start_index': 186, 'text': 'probably the closest thing', 'end_index': 212, 'id': 9}, {'start_index': 216, 'text': 'a living hell', 'end_index': 229, 'id': 10}, {'start_index': 233, 'text': 'Solark42', 'end_index': 241, 'id': 11}, {'end_index': 272, 'start_index': 259, 'text': 'Rocketman1800', 'id': 12}, {'start_index': 278, 'text': 'I', 'end_index': 279, 'id': 13}, {'start_index': 285, 'text': 'I', 'end_index': 286, 'id': 14}, {'start_index': 291, 'text': 'meds', 'end_index': 295, 'id': 15}, {'start_index': 309, 'text': 'I', 'end_index': 310, 'id': 16}, {'start_index': 316, 'text': 'someone', 'end_index': 323, 'id': 17}, {'start_index': 347, 'text': 'me', 'end_index': 349, 'id': 18}, {'start_index': 356, 'text': 'u', 'end_index': 357, 'id': 19}, {'start_index': 371, 'text': 'I', 'end_index': 372, 'id': 20}, {'start_index': 405, 'text': 'everything', 'end_index': 415, 'id': 21}, {'start_index': 420, 'text': 'a while', 'end_index': 427, 'id': 22}];
+	var coref = [{'id': 0, 'members': [0]}, {'id': 1, 'members': [1]}, {'id': 2, 'members': [3, 11, 19]}, {'id': 3, 'members': [4]}, {'id': 4, 'members': [5]}, {'id': 5, 'members': [6]}, {'id': 6, 'members': [7]}, {'id': 7, 'members': [8]}, {'id': 8, 'members': [9]}, {'id': 9, 'members': [10]}, {'id': 11, 'members': [13, 14, 16, 18, 20]}, {'id': 12, 'members': [15]}, {'id': 13, 'members': [17]}, {'id': 14, 'members': [21]}, {'id': 15, 'members': [22]}, {'id': 16, 'members': [2]}, {'id': 17, 'members': [12]}];
+	var bridges = [];
+	var current_np_id = 0;
+	var url = 'N/A';
+	</script>
+	<script src='ood_ids.js'></script>
+	<script src='bridging_exploration.js'></script>
+	<script src="https://cdn.jsdelivr.net/npm/ractive"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
+</head>
+
+<body>
+<div id="page">
+	<script src='data_init.js'></script>
+</div>	
+</body>
+
+
+</html>

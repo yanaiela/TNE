@@ -1,0 +1,35 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>BridgingExplorationTool</title>
+	<link rel="stylesheet" href="styles.css">
+	<script type="text/javascript">
+	var COLORS = ["#8cffd8", "#FF7F50", "#6495ED", "#BDB76B", "#DDA0DD", "#FF69B4", "#FFD700", "#F5DEB3"];
+	var PREPS = ['of', 'in', 'to', 'for', 'with', 'on', 'at', 'from', 'by', 'about', 'over', 'between', 'against', 'under', 'among', 'before', 'after'];
+	var IDX = 273;
+	var HIT_ID = 50065;
+	var BRIDGING_RESULTS_UNFOLDED = [{'bridge': 5, 'complement': 17, 'preposition': 'member(s) of', 'coref_cluster': 9}, {'bridge': 8, 'complement': 5, 'preposition': 'of', 'coref_cluster': 2}, {'bridge': 8, 'complement': 7, 'preposition': 'of', 'coref_cluster': 2}, {'bridge': 8, 'complement': 13, 'preposition': 'of', 'coref_cluster': 2}, {'bridge': 8, 'complement': 14, 'preposition': 'of', 'coref_cluster': 2}, {'bridge': 8, 'complement': 25, 'preposition': 'of', 'coref_cluster': 2}, {'bridge': 10, 'complement': 12, 'preposition': 'between', 'coref_cluster': 7}, {'bridge': 10, 'complement': 11, 'preposition': 'between', 'coref_cluster': 6}, {'bridge': 14, 'complement': 17, 'preposition': 'member(s) of', 'coref_cluster': 9}, {'bridge': 14, 'complement': 2, 'preposition': 'of', 'coref_cluster': 1}, {'bridge': 16, 'complement': 18, 'preposition': 'about', 'coref_cluster': 10}, {'bridge': 16, 'complement': 17, 'preposition': 'about', 'coref_cluster': 9}, {'bridge': 16, 'complement': 2, 'preposition': 'by', 'coref_cluster': 1}, {'bridge': 17, 'complement': 23, 'preposition': 'in', 'coref_cluster': 8}, {'bridge': 17, 'complement': 16, 'preposition': 'in', 'coref_cluster': 8}, {'bridge': 18, 'complement': 23, 'preposition': 'in', 'coref_cluster': 8}, {'bridge': 18, 'complement': 16, 'preposition': 'in', 'coref_cluster': 8}, {'bridge': 18, 'complement': 0, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 18, 'complement': 1, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 22, 'complement': 5, 'preposition': 'of', 'coref_cluster': 2}, {'bridge': 22, 'complement': 7, 'preposition': 'of', 'coref_cluster': 2}, {'bridge': 22, 'complement': 13, 'preposition': 'of', 'coref_cluster': 2}, {'bridge': 22, 'complement': 14, 'preposition': 'of', 'coref_cluster': 2}, {'bridge': 22, 'complement': 25, 'preposition': 'of', 'coref_cluster': 2}, {'bridge': 23, 'complement': 18, 'preposition': 'about', 'coref_cluster': 10}, {'bridge': 23, 'complement': 17, 'preposition': 'about', 'coref_cluster': 9}, {'bridge': 23, 'complement': 2, 'preposition': 'by', 'coref_cluster': 1}];
+	var CURR_SPLIT_HIT_IDS = []
+	var BRIDGING_RESULTS = [];
+	var text = {'raw_text': 'NADA THE LILY By H. Rider Haggard DEDICATION Sompseu: For I will call you by the name that for fifty years has been honoured by every tribe between Zambesi and Cape Agulbas,--I greet you! Sompseu, my father, I have written a book that tells of men and matters of which you know the most of any who still look upon the light; therefore, I set your name within that book and, such as it is, I offer it to you.', 'title': {'start_index': 0, 'end_index': 13}, 'subtitles': [{'start_index': 14, 'end_index': 33, 'id': 0}, {'start_index': 34, 'end_index': 44, 'id': 1}], 'paragraphs': [{'start_index': 45, 'end_index': 53, 'id': 0}, {'start_index': 54, 'end_index': 187, 'id': 1}, {'start_index': 188, 'end_index': 407, 'id': 2}]};
+	var nps = [{'start_index': 0, 'text': 'NADA', 'end_index': 4, 'id': 0}, {'start_index': 5, 'text': 'THE LILY', 'end_index': 13, 'id': 1}, {'start_index': 17, 'text': 'H. Rider', 'end_index': 25, 'id': 2}, {'start_index': 26, 'text': 'Haggard', 'end_index': 33, 'id': 3}, {'end_index': 44, 'start_index': 34, 'text': 'DEDICATION', 'id': 4}, {'start_index': 45, 'text': 'Sompseu', 'end_index': 52, 'id': 5}, {'start_index': 58, 'text': 'I', 'end_index': 59, 'id': 6}, {'start_index': 70, 'text': 'you', 'end_index': 73, 'id': 7}, {'start_index': 77, 'text': 'the name', 'end_index': 85, 'id': 8}, {'start_index': 95, 'text': 'fifty years', 'end_index': 106, 'id': 9}, {'start_index': 128, 'text': 'every tribe', 'end_index': 139, 'id': 10}, {'start_index': 148, 'text': 'Zambesi', 'end_index': 155, 'id': 11}, {'start_index': 160, 'text': 'Cape Agulbas,--I', 'end_index': 176, 'id': 12}, {'start_index': 183, 'text': 'you', 'end_index': 186, 'id': 13}, {'start_index': 197, 'text': 'my father', 'end_index': 206, 'id': 14}, {'start_index': 208, 'text': 'I', 'end_index': 209, 'id': 15}, {'start_index': 223, 'text': 'a book', 'end_index': 229, 'id': 16}, {'start_index': 244, 'text': 'men', 'end_index': 247, 'id': 17}, {'start_index': 252, 'text': 'matters', 'end_index': 259, 'id': 18}, {'start_index': 263, 'text': 'which you', 'end_index': 272, 'id': 19}, {'start_index': 314, 'text': 'the light', 'end_index': 323, 'id': 20}, {'start_index': 336, 'text': 'I', 'end_index': 337, 'id': 21}, {'start_index': 342, 'text': 'your name', 'end_index': 351, 'id': 22}, {'start_index': 359, 'text': 'that book', 'end_index': 368, 'id': 23}, {'start_index': 389, 'text': 'I', 'end_index': 390, 'id': 24}, {'start_index': 403, 'text': 'you', 'end_index': 406, 'id': 25}];
+	var coref = [{'id': 0, 'members': [0, 1]}, {'id': 1, 'members': [2]}, {'id': 2, 'members': [5, 7, 13, 14, 25]}, {'id': 3, 'members': [22, 8]}, {'id': 4, 'members': [9]}, {'id': 5, 'members': [10]}, {'id': 6, 'members': [11]}, {'id': 7, 'members': [12]}, {'id': 8, 'members': [23, 16]}, {'id': 9, 'members': [17]}, {'id': 10, 'members': [18]}, {'id': 11, 'members': [19]}, {'id': 12, 'members': [20]}, {'id': 13, 'members': [3]}, {'id': 14, 'members': [6, 15, 21, 24]}, {'id': 15, 'members': [4]}];
+	var bridges = [];
+	var current_np_id = 0;
+	var url = 'N/A';
+	</script>
+	<script src='ood_ids.js'></script>
+	<script src='bridging_exploration.js'></script>
+	<script src="https://cdn.jsdelivr.net/npm/ractive"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
+</head>
+
+<body>
+<div id="page">
+	<script src='data_init.js'></script>
+</div>	
+</body>
+
+
+</html>

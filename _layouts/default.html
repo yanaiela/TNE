@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: "en-US" }}">
+  <head>
+
+    {% if site.google_analytics %}
+      <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '{{ site.google_analytics }}');
+      </script>
+    {% endif %}
+    <meta charset="UTF-8">
+
+{% seo %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#157878">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+
+<!--    <link rel="shortcut icon" type="image/x-icon" href="/media/tne.svg">-->
+      <link rel="shortcut icon" type="image/png" href="{{ "/media/tne.svg"  | absolute_url }}">
+
+
+    <style>
+body {margin:0;}
+
+/*.main-content {*/
+/*    max-width: 90rem;*/
+/*}*/
+
+.navbar {
+  overflow: hidden;
+  background-color: #3452A0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.navbar a {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 15px;
+  text-decoration: none;
+}
+
+.navbar a:hover:not(.active) {
+    color: #c7c7c7;
+}
+      
+.active {
+  background-color:#3452A0;
+  color: white;
+  font-weight: bold;
+  font-size: large;
+}
+
+.main {
+  padding: 0px;
+  margin-top: 40px;
+}
+      
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 13%;
+  display: inline-block;
+  font-size: small;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.container {
+  padding: 8px 16px;
+  font-size: small;
+}
+      
+p.note
+{
+     -moz-border-radius: 6px;
+     -webkit-border-radius: 6px;
+     background-color: #f0f7fb;
+     background-repeat: no-repeat;
+     border: solid 1px #3498db;
+     border-radius: 6px;
+     line-height: 18px;
+     overflow: hidden;
+     padding: 15px 15px;
+     display: inline-block;
+}
+      
+p.decomp
+{
+     -moz-border-radius: 6px;
+     -webkit-border-radius: 6px;
+     background-color: #ddffdd;
+     background-repeat: no-repeat;
+     border: solid 1px #4CAF50;
+     border-radius: 6px;
+     line-height: 18px;
+     overflow: hidden;
+     padding: 15px 15px;
+     display: inline-block;
+}
+
+.btn-primary {
+    color: #212529;
+    background-color: #7cc;
+    border-color: #5bc2c2
+}
+
+.btn-primary:hover {
+    color: #212529;
+    background-color: #52bebe;
+    border-color: #8ad3d3
+}
+
+.btn-primary:focus,
+.btn-primary.focus {
+    box-shadow: 0 0 0 .2rem rgba(91, 194, 194, 0.5)
+}
+
+.btn-primary.disabled,
+.btn-primary:disabled {
+    color: #212529;
+    background-color: #2ca;
+    border-color: #2ca
+}
+
+.btn-primary:not(:disabled):not(.disabled):active,
+.btn-primary:not(:disabled):not(.disabled).active,
+.show>.btn-primary.dropdown-toggle {
+    color: #212529;
+    background-color: #9cdada;
+    border-color: #2e7c7c
+}
+
+.btn-primary:not(:disabled):not(.disabled):active:focus,
+.btn-primary:not(:disabled):not(.disabled).active:focus,
+.show>.btn-primary.dropdown-toggle:focus {
+    box-shadow: 0 0 0 .2rem rgba(91, 194, 194, 0.5)
+}
+
+.btn-outline-primary {
+    color: #7cc;
+    background-color: transparent;
+    background-image: none;
+    border-color: #7cc
+}
+
+.btn-outline-primary:hover {
+    color: #222;
+    background-color: #8ad3d3;
+    border-color: #7cc
+}
+
+.btn-outline-primary:focus,
+.btn-outline-primary.focus {
+    box-shadow: 0 0 0 .2rem rgba(119, 204, 204, 0.5)
+}
+
+.btn-outline-primary.disabled,
+.btn-outline-primary:disabled {
+    color: #7cc;
+    background-color: transparent
+}
+
+.btn-outline-primary:not(:disabled):not(.disabled):active,
+.btn-outline-primary:not(:disabled):not(.disabled).active,
+.show>.btn-outline-primary.dropdown-toggle {
+    color: #212529;
+    background-color: #8ad3d3;
+    border-color: #7cc
+}
+
+.btn-outline-primary:not(:disabled):not(.disabled):active:focus,
+.btn-outline-primary:not(:disabled):not(.disabled).active:focus,
+.show>.btn-outline-primary.dropdown-toggle:focus {
+    box-shadow: 0 0 0 .2rem rgba(119, 204, 204, 0.5)
+}
+
+.multiline {
+  white-space: pre-wrap;
+}
+
+
+/* _forms.scss:284 */
+.form-group {
+  display: flex;
+  flex: 0 0 auto;
+  flex-flow: row wrap;
+  align-items: center;
+  margin-bottom: 0;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    background-clip: padding-box;
+}
+
+</style>
+</head>
+<body>
+
+<div class="navbar">
+  <a class="active" href="https://yanaiela.github.io/TNE/">TNE</a>
+  <a href="https://arxiv.org/abs/2109.12085">Paper</a>
+  <a href="https://yanaiela.github.io/TNE/demo">Demo</a>
+  <a href="https://yanaiela.github.io/TNE/explore">Explore</a>
+</div>
+ 
+ <div class="main">
+    <header class="page-header" role="banner">
+      <h1 class="project-name">The Text-base NP Enrichment Task</h1>
+        <a href="https://yanaiela.github.io/TNE/" class="btn">About</a>
+        <a href="https://arxiv.org/abs/2109.12085" class="btn">Paper</a>
+        <a href="{{ site.github.repository_url }}" class="btn">GitHub</a>
+        <a href="https://yanaiela.github.io/TNE/#download" class="btn">Download</a>
+        <a href="https://yanaiela.github.io/TNE/explore" class="btn">Explore</a>
+        <a href="https://leaderboard.allenai.org/tne/submissions/public" class="btn">Leaderboard</a>
+    </header>
+  
+
+    <main id="content" class="main-content" role="main">
+      {{ content }}
+
+      <footer class="site-footer">
+          <span class="site-footer-owner">TNE</span>
+        <span class="site-footer-credits">Recovering preposition-mediated NP relations</span>
+        
+        <p float="left">
+
+          <a href="https://allenai.org/">
+            <img src="media/ai2.png" height="98">
+          </a>
+          <a href="https://biu-nlp.github.io/">
+            <img src="media/biu.png" height="100">
+          </a>
+          <a href="https://erc.europa.eu/">
+            <img src="media/erc.png" height="100">
+          </a>
+        </p>
+
+      </footer>
+    </main>
+   </div>
+  </body>
+</html>

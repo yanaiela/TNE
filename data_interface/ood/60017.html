@@ -1,0 +1,35 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>BridgingExplorationTool</title>
+	<link rel="stylesheet" href="styles.css">
+	<script type="text/javascript">
+	var COLORS = ["#8cffd8", "#FF7F50", "#6495ED", "#BDB76B", "#DDA0DD", "#FF69B4", "#FFD700", "#F5DEB3"];
+	var PREPS = ['of', 'in', 'to', 'for', 'with', 'on', 'at', 'from', 'by', 'about', 'over', 'between', 'against', 'under', 'among', 'before', 'after'];
+	var IDX = 381;
+	var HIT_ID = 60017;
+	var BRIDGING_RESULTS_UNFOLDED = [{'bridge': 0, 'complement': 14, 'preposition': 'about', 'coref_cluster': 12}, {'bridge': 0, 'complement': 13, 'preposition': 'about', 'coref_cluster': 11}, {'bridge': 0, 'complement': 12, 'preposition': 'about', 'coref_cluster': 10}, {'bridge': 0, 'complement': 11, 'preposition': 'about', 'coref_cluster': 9}, {'bridge': 0, 'complement': 10, 'preposition': 'about', 'coref_cluster': 8}, {'bridge': 0, 'complement': 8, 'preposition': 'about', 'coref_cluster': 6}, {'bridge': 0, 'complement': 6, 'preposition': 'about', 'coref_cluster': 5}, {'bridge': 0, 'complement': 7, 'preposition': 'about', 'coref_cluster': 5}, {'bridge': 0, 'complement': 2, 'preposition': 'about', 'coref_cluster': 2}, {'bridge': 2, 'complement': 15, 'preposition': 'with', 'coref_cluster': 13}, {'bridge': 10, 'complement': 11, 'preposition': 'for', 'coref_cluster': 9}, {'bridge': 10, 'complement': 11, 'preposition': 'of', 'coref_cluster': 9}, {'bridge': 10, 'complement': 8, 'preposition': 'of', 'coref_cluster': 6}, {'bridge': 10, 'complement': 6, 'preposition': 'of', 'coref_cluster': 5}, {'bridge': 10, 'complement': 7, 'preposition': 'of', 'coref_cluster': 5}, {'bridge': 11, 'complement': 8, 'preposition': 'about', 'coref_cluster': 6}, {'bridge': 11, 'complement': 8, 'preposition': 'of', 'coref_cluster': 6}, {'bridge': 11, 'complement': 6, 'preposition': 'about', 'coref_cluster': 5}, {'bridge': 11, 'complement': 7, 'preposition': 'about', 'coref_cluster': 5}, {'bridge': 11, 'complement': 6, 'preposition': 'of', 'coref_cluster': 5}, {'bridge': 11, 'complement': 7, 'preposition': 'of', 'coref_cluster': 5}, {'bridge': 13, 'complement': 14, 'preposition': 'of', 'coref_cluster': 12}];
+	var CURR_SPLIT_HIT_IDS = []
+	var BRIDGING_RESULTS = [];
+	var text = {'raw_text': 'Ask Anything Wednesday Author: AutoModerator the_humeister: "Why hasn\'t Japan\'s economy collapsed yet with such a high debt:GDP ratio? "  biscuit852: "Ive read that if economic growth (GDP) is high enough, fiscal deficits wouldn’t necessarily matter. What is the math behind this logic?"  753951321654987: "Is there a psychological way to break the cycle of a conspiracy based mindset? " ', 'title': {'start_index': 0, 'end_index': 22}, 'subtitles': [{'start_index': 23, 'end_index': 44, 'id': 0}], 'paragraphs': [{'start_index': 45, 'end_index': 137, 'id': 0}, {'start_index': 138, 'end_index': 288, 'id': 1}, {'start_index': 289, 'end_index': 388, 'id': 2}], 'indents': [0, 0, 0], 'paragraph_authors': ['the_humeister', 'biscuit852', '753951321654987']};
+	var nps = [{'start_index': 4, 'text': 'Anything', 'end_index': 12, 'id': 0}, {'start_index': 31, 'text': 'AutoModerator', 'end_index': 44, 'id': 1}, {'start_index': 72, 'text': "Japan's economy", 'end_index': 87, 'id': 2}, {'start_index': 107, 'text': 'such a high debt', 'end_index': 123, 'id': 3}, {'start_index': 138, 'text': 'biscuit852', 'end_index': 148, 'id': 4}, {'start_index': 151, 'text': 'I', 'end_index': 152, 'id': 5}, {'start_index': 168, 'text': 'economic growth', 'end_index': 183, 'id': 6}, {'start_index': 185, 'text': 'GDP', 'end_index': 188, 'id': 7}, {'start_index': 206, 'text': 'fiscal deficits', 'end_index': 221, 'id': 8}, {'start_index': 251, 'text': 'What', 'end_index': 255, 'id': 9}, {'start_index': 259, 'text': 'the math', 'end_index': 267, 'id': 10}, {'start_index': 275, 'text': 'this logic', 'end_index': 285, 'id': 11}, {'start_index': 316, 'text': 'a psychological way', 'end_index': 335, 'id': 12}, {'start_index': 345, 'text': 'the cycle', 'end_index': 354, 'id': 13}, {'start_index': 358, 'text': 'a conspiracy based mindset', 'end_index': 384, 'id': 14}, {'end_index': 133, 'start_index': 107, 'text': 'such a high debt:GDP ratio', 'id': 15}];
+	var coref = [{'id': 0, 'members': [0]}, {'id': 1, 'members': [1]}, {'id': 2, 'members': [2]}, {'id': 3, 'members': [3]}, {'id': 4, 'members': [4, 5]}, {'id': 5, 'members': [6, 7]}, {'id': 6, 'members': [8]}, {'id': 7, 'members': [9]}, {'id': 8, 'members': [10]}, {'id': 9, 'members': [11]}, {'id': 10, 'members': [12]}, {'id': 11, 'members': [13]}, {'id': 12, 'members': [14]}, {'id': 13, 'members': [15]}];
+	var bridges = [];
+	var current_np_id = 0;
+	var url = 'N/A';
+	</script>
+	<script src='ood_ids.js'></script>
+	<script src='bridging_exploration.js'></script>
+	<script src="https://cdn.jsdelivr.net/npm/ractive"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
+</head>
+
+<body>
+<div id="page">
+	<script src='data_init.js'></script>
+</div>	
+</body>
+
+
+</html>

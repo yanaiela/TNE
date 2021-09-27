@@ -1,0 +1,35 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>BridgingExplorationTool</title>
+	<link rel="stylesheet" href="styles.css">
+	<script type="text/javascript">
+	var COLORS = ["#8cffd8", "#FF7F50", "#6495ED", "#BDB76B", "#DDA0DD", "#FF69B4", "#FFD700", "#F5DEB3"];
+	var PREPS = ['of', 'in', 'to', 'for', 'with', 'on', 'at', 'from', 'by', 'about', 'over', 'between', 'against', 'under', 'among', 'before', 'after'];
+	var IDX = 399;
+	var HIT_ID = 61016;
+	var BRIDGING_RESULTS_UNFOLDED = [{'bridge': 1, 'complement': 29, 'preposition': 'member(s) of', 'coref_cluster': 18}, {'bridge': 1, 'complement': 17, 'preposition': 'from', 'coref_cluster': 13}, {'bridge': 1, 'complement': 19, 'preposition': 'from', 'coref_cluster': 13}, {'bridge': 1, 'complement': 2, 'preposition': 'at', 'coref_cluster': 2}, {'bridge': 3, 'complement': 30, 'preposition': 'of', 'coref_cluster': 19}, {'bridge': 8, 'complement': 29, 'preposition': 'member(s) of', 'coref_cluster': 18}, {'bridge': 8, 'complement': 12, 'preposition': 'from', 'coref_cluster': 8}, {'bridge': 8, 'complement': 11, 'preposition': 'from', 'coref_cluster': 7}, {'bridge': 8, 'complement': 9, 'preposition': 'with', 'coref_cluster': 6}, {'bridge': 8, 'complement': 22, 'preposition': 'with', 'coref_cluster': 6}, {'bridge': 8, 'complement': 2, 'preposition': 'at', 'coref_cluster': 2}, {'bridge': 9, 'complement': 8, 'preposition': 'for', 'coref_cluster': 5}, {'bridge': 9, 'complement': 1, 'preposition': 'for', 'coref_cluster': 1}, {'bridge': 9, 'complement': 8, 'preposition': 'on', 'coref_cluster': 5}, {'bridge': 14, 'complement': 15, 'preposition': 'of', 'coref_cluster': 11}, {'bridge': 15, 'complement': 8, 'preposition': 'of', 'coref_cluster': 5}, {'bridge': 16, 'complement': 18, 'preposition': 'for', 'coref_cluster': 4}, {'bridge': 16, 'complement': 20, 'preposition': 'for', 'coref_cluster': 4}, {'bridge': 16, 'complement': 5, 'preposition': 'for', 'coref_cluster': 4}, {'bridge': 16, 'complement': 8, 'preposition': 'about', 'coref_cluster': 5}, {'bridge': 21, 'complement': 17, 'preposition': 'from', 'coref_cluster': 13}, {'bridge': 21, 'complement': 19, 'preposition': 'from', 'coref_cluster': 13}, {'bridge': 21, 'complement': 1, 'preposition': 'member(s) of', 'coref_cluster': 1}, {'bridge': 22, 'complement': 8, 'preposition': 'for', 'coref_cluster': 5}, {'bridge': 22, 'complement': 8, 'preposition': 'on', 'coref_cluster': 5}, {'bridge': 22, 'complement': 1, 'preposition': 'for', 'coref_cluster': 1}];
+	var CURR_SPLIT_HIT_IDS = []
+	var BRIDGING_RESULTS = [];
+	var text = {'raw_text': 'YSK You can request most internet orders to not be left at your door. Author: Aarmed WifeAquatic: "So you are saying you can choose to have packages require a signature if you tell UPS or USPS? We have been dealing with a lot of theft lately this would be a godsend! "  Aarmed: "UPS for sure.  Just put all of it on the company you\'re buying from, tell them that you wish to have your purchase require a signature to receive."  C2ez: "Hmm did u find this from family guy"  Aarmed: "negative, I help ship stuff sometimes" ', 'title': {'start_index': 0, 'end_index': 69}, 'subtitles': [{'start_index': 70, 'end_index': 84, 'id': 0}], 'paragraphs': [{'start_index': 85, 'end_index': 269, 'id': 0}, {'start_index': 270, 'end_index': 427, 'id': 1}, {'start_index': 428, 'end_index': 472, 'id': 2}, {'start_index': 473, 'end_index': 521, 'id': 3}], 'indents': [0, 1, 0, 1], 'paragraph_authors': ['WifeAquatic', 'Aarmed', 'C2ez', 'Aarmed']};
+	var nps = [{'start_index': 4, 'text': 'You', 'end_index': 7, 'id': 0}, {'start_index': 20, 'text': 'most internet orders', 'end_index': 40, 'id': 1}, {'start_index': 59, 'text': 'your door', 'end_index': 68, 'id': 2}, {'start_index': 70, 'text': 'Author', 'end_index': 76, 'id': 3}, {'start_index': 78, 'text': 'Aarmed', 'end_index': 84, 'id': 4}, {'start_index': 85, 'text': 'WifeAquatic', 'end_index': 96, 'id': 5}, {'start_index': 102, 'text': 'you', 'end_index': 105, 'id': 6}, {'start_index': 117, 'text': 'you', 'end_index': 120, 'id': 7}, {'start_index': 140, 'text': 'packages', 'end_index': 148, 'id': 8}, {'start_index': 157, 'text': 'a signature', 'end_index': 168, 'id': 9}, {'start_index': 172, 'text': 'you', 'end_index': 175, 'id': 10}, {'start_index': 181, 'text': 'UPS', 'end_index': 184, 'id': 11}, {'start_index': 188, 'text': 'USPS', 'end_index': 192, 'id': 12}, {'start_index': 194, 'text': 'We', 'end_index': 196, 'id': 13}, {'start_index': 220, 'text': 'a lot', 'end_index': 225, 'id': 14}, {'start_index': 229, 'text': 'theft', 'end_index': 234, 'id': 15}, {'start_index': 256, 'text': 'a godsend', 'end_index': 265, 'id': 16}, {'start_index': 316, 'text': 'the company', 'end_index': 327, 'id': 17}, {'start_index': 328, 'text': 'you', 'end_index': 331, 'id': 18}, {'start_index': 353, 'text': 'them', 'end_index': 357, 'id': 19}, {'start_index': 363, 'text': 'you', 'end_index': 366, 'id': 20}, {'start_index': 380, 'text': 'your purchase', 'end_index': 393, 'id': 21}, {'start_index': 402, 'text': 'a signature', 'end_index': 413, 'id': 22}, {'start_index': 428, 'text': 'C2ez', 'end_index': 432, 'id': 23}, {'start_index': 435, 'text': 'Hmm', 'end_index': 438, 'id': 24}, {'start_index': 443, 'text': 'u', 'end_index': 444, 'id': 25}, {'start_index': 460, 'text': 'family guy', 'end_index': 470, 'id': 26}, {'start_index': 473, 'text': 'Aarmed', 'end_index': 479, 'id': 27}, {'start_index': 492, 'text': 'I', 'end_index': 493, 'id': 28}, {'start_index': 504, 'text': 'stuff', 'end_index': 509, 'id': 29}, {'end_index': 68, 'start_index': 0, 'text': 'YSK You can request most internet orders to not be left at your door', 'id': 30}];
+	var coref = [{'id': 0, 'members': [0, 10, 7]}, {'id': 1, 'members': [1]}, {'id': 2, 'members': [2]}, {'id': 3, 'members': [3, 4, 6, 25, 27, 28]}, {'id': 4, 'members': [18, 20, 5]}, {'id': 5, 'members': [8]}, {'id': 6, 'members': [9, 22]}, {'id': 7, 'members': [11]}, {'id': 8, 'members': [12]}, {'id': 9, 'members': [13]}, {'id': 10, 'members': [14]}, {'id': 11, 'members': [15]}, {'id': 12, 'members': [16]}, {'id': 13, 'members': [17, 19]}, {'id': 14, 'members': [21]}, {'id': 15, 'members': [23]}, {'id': 16, 'members': [24]}, {'id': 17, 'members': [26]}, {'id': 18, 'members': [29]}, {'id': 19, 'members': [30]}];
+	var bridges = [];
+	var current_np_id = 0;
+	var url = 'N/A';
+	</script>
+	<script src='ood_ids.js'></script>
+	<script src='bridging_exploration.js'></script>
+	<script src="https://cdn.jsdelivr.net/npm/ractive"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
+</head>
+
+<body>
+<div id="page">
+	<script src='data_init.js'></script>
+</div>	
+</body>
+
+
+</html>

@@ -1,0 +1,35 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>BridgingExplorationTool</title>
+	<link rel="stylesheet" href="styles.css">
+	<script type="text/javascript">
+	var COLORS = ["#8cffd8", "#FF7F50", "#6495ED", "#BDB76B", "#DDA0DD", "#FF69B4", "#FFD700", "#F5DEB3"];
+	var PREPS = ['of', 'in', 'to', 'for', 'with', 'on', 'at', 'from', 'by', 'about', 'over', 'between', 'against', 'under', 'among', 'before', 'after'];
+	var IDX = 406;
+	var HIT_ID = 61122;
+	var BRIDGING_RESULTS_UNFOLDED = [{'bridge': 0, 'complement': 1, 'preposition': 'in', 'coref_cluster': 1}, {'bridge': 2, 'complement': 3, 'preposition': 'in', 'coref_cluster': 3}, {'bridge': 4, 'complement': 5, 'preposition': 'in', 'coref_cluster': 5}, {'bridge': 6, 'complement': 29, 'preposition': 'of', 'coref_cluster': 26}, {'bridge': 8, 'complement': 9, 'preposition': 'of', 'coref_cluster': 6}, {'bridge': 8, 'complement': 6, 'preposition': 'of', 'coref_cluster': 6}, {'bridge': 8, 'complement': 7, 'preposition': 'of', 'coref_cluster': 6}, {'bridge': 8, 'complement': 5, 'preposition': 'in', 'coref_cluster': 5}, {'bridge': 10, 'complement': 5, 'preposition': 'member(s) of', 'coref_cluster': 5}, {'bridge': 10, 'complement': 5, 'preposition': 'of', 'coref_cluster': 5}, {'bridge': 11, 'complement': 5, 'preposition': 'member(s) of', 'coref_cluster': 5}, {'bridge': 11, 'complement': 5, 'preposition': 'of', 'coref_cluster': 5}, {'bridge': 12, 'complement': 5, 'preposition': 'member(s) of', 'coref_cluster': 5}, {'bridge': 12, 'complement': 5, 'preposition': 'of', 'coref_cluster': 5}, {'bridge': 16, 'complement': 5, 'preposition': 'in', 'coref_cluster': 5}, {'bridge': 22, 'complement': 25, 'preposition': 'in', 'coref_cluster': 21}, {'bridge': 22, 'complement': 24, 'preposition': 'with', 'coref_cluster': 20}, {'bridge': 22, 'complement': 23, 'preposition': 'with', 'coref_cluster': 19}, {'bridge': 22, 'complement': 5, 'preposition': 'member(s) of', 'coref_cluster': 5}, {'bridge': 22, 'complement': 5, 'preposition': 'in', 'coref_cluster': 5}, {'bridge': 23, 'complement': 22, 'preposition': 'of', 'coref_cluster': 18}, {'bridge': 25, 'complement': 5, 'preposition': 'of', 'coref_cluster': 5}, {'bridge': 25, 'complement': 22, 'preposition': 'of', 'coref_cluster': 18}, {'bridge': 26, 'complement': 5, 'preposition': 'in', 'coref_cluster': 5}, {'bridge': 26, 'complement': 22, 'preposition': 'of', 'coref_cluster': 18}];
+	var CURR_SPLIT_HIT_IDS = []
+	var BRIDGING_RESULTS = [];
+	var text = {'raw_text': 'Is it possible to complete a Ph.D. in History (with a B.A. in a technical field) while also serving active duty in the military? Author: Gof_ 2lisimst: "Depending on your community - if you\'re in SWO, subs, Aviator it will be tremendously difficult."  ass_cash253: "It\'s possible to get a bachelors or even a masters, depending on what your active duty job is it can be a lot harder or easier. Never heard of anyone completing a PHD though"  nopeDC: "Might be worth asking/cross posting in r/Military. I knew people that completed their bachelors and masters in uniform while still working their duty position, but not PhDs that I can recall. " ', 'title': {'start_index': 0, 'end_index': 128}, 'subtitles': [{'start_index': 129, 'end_index': 141, 'id': 0}], 'paragraphs': [{'start_index': 142, 'end_index': 251, 'id': 0}, {'start_index': 252, 'end_index': 441, 'id': 1}, {'start_index': 442, 'end_index': 645, 'id': 2}], 'indents': [0, 0, 0], 'paragraph_authors': ['2lisimst', 'ass_cash253', 'nopeDC']};
+	var nps = [{'start_index': 27, 'text': 'a Ph.D.', 'end_index': 34, 'id': 0}, {'start_index': 38, 'text': 'History', 'end_index': 45, 'id': 1}, {'start_index': 52, 'text': 'a B.A.', 'end_index': 58, 'id': 2}, {'start_index': 62, 'text': 'a technical field', 'end_index': 79, 'id': 3}, {'start_index': 100, 'text': 'active duty', 'end_index': 111, 'id': 4}, {'start_index': 115, 'text': 'the military', 'end_index': 127, 'id': 5}, {'start_index': 129, 'text': 'Author', 'end_index': 135, 'id': 6}, {'start_index': 137, 'text': 'Gof_', 'end_index': 141, 'id': 7}, {'start_index': 166, 'text': 'your community', 'end_index': 180, 'id': 8}, {'start_index': 186, 'text': 'you', 'end_index': 189, 'id': 9}, {'start_index': 196, 'text': 'SWO', 'end_index': 199, 'id': 10}, {'start_index': 201, 'text': 'subs', 'end_index': 205, 'id': 11}, {'start_index': 207, 'text': 'Aviator', 'end_index': 214, 'id': 12}, {'start_index': 287, 'text': 'a bachelors', 'end_index': 298, 'id': 13}, {'start_index': 302, 'text': 'even a masters', 'end_index': 316, 'id': 14}, {'start_index': 331, 'text': 'what', 'end_index': 335, 'id': 15}, {'start_index': 336, 'text': 'your active duty job', 'end_index': 356, 'id': 16}, {'start_index': 409, 'text': 'anyone', 'end_index': 415, 'id': 17}, {'start_index': 427, 'text': 'a PHD', 'end_index': 432, 'id': 18}, {'start_index': 473, 'text': 'cross', 'end_index': 478, 'id': 19}, {'start_index': 490, 'text': 'r/Military', 'end_index': 500, 'id': 20}, {'start_index': 502, 'text': 'I', 'end_index': 503, 'id': 21}, {'start_index': 509, 'text': 'people', 'end_index': 515, 'id': 22}, {'start_index': 531, 'text': 'their bachelors', 'end_index': 546, 'id': 23}, {'start_index': 551, 'text': 'masters', 'end_index': 558, 'id': 24}, {'start_index': 562, 'text': 'uniform', 'end_index': 569, 'id': 25}, {'start_index': 590, 'text': 'their duty position', 'end_index': 609, 'id': 26}, {'start_index': 615, 'text': 'not PhDs', 'end_index': 623, 'id': 27}, {'start_index': 624, 'text': 'that I', 'end_index': 630, 'id': 28}, {'end_index': 128, 'start_index': 0, 'text': 'Is it possible to complete a Ph.D. in History (with a B.A. in a technical field) while also serving active duty in the military?', 'id': 29}];
+	var coref = [{'id': 0, 'members': [0, 18]}, {'id': 1, 'members': [1]}, {'id': 2, 'members': [2]}, {'id': 3, 'members': [3]}, {'id': 4, 'members': [4]}, {'id': 5, 'members': [5]}, {'id': 6, 'members': [9, 6, 7]}, {'id': 7, 'members': [8]}, {'id': 8, 'members': [10]}, {'id': 9, 'members': [11]}, {'id': 10, 'members': [12]}, {'id': 11, 'members': [14]}, {'id': 12, 'members': [15]}, {'id': 13, 'members': [16]}, {'id': 14, 'members': [17]}, {'id': 15, 'members': [19]}, {'id': 16, 'members': [20]}, {'id': 17, 'members': [21]}, {'id': 18, 'members': [22]}, {'id': 19, 'members': [23]}, {'id': 20, 'members': [24]}, {'id': 21, 'members': [25]}, {'id': 22, 'members': [26]}, {'id': 23, 'members': [27]}, {'id': 24, 'members': [28]}, {'id': 25, 'members': [13]}, {'id': 26, 'members': [29]}];
+	var bridges = [];
+	var current_np_id = 0;
+	var url = 'N/A';
+	</script>
+	<script src='ood_ids.js'></script>
+	<script src='bridging_exploration.js'></script>
+	<script src="https://cdn.jsdelivr.net/npm/ractive"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
+</head>
+
+<body>
+<div id="page">
+	<script src='data_init.js'></script>
+</div>	
+</body>
+
+
+</html>

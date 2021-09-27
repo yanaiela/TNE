@@ -1,0 +1,35 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>BridgingExplorationTool</title>
+	<link rel="stylesheet" href="styles.css">
+	<script type="text/javascript">
+	var COLORS = ["#8cffd8", "#FF7F50", "#6495ED", "#BDB76B", "#DDA0DD", "#FF69B4", "#FFD700", "#F5DEB3"];
+	var PREPS = ['of', 'in', 'to', 'for', 'with', 'on', 'at', 'from', 'by', 'about', 'over', 'between', 'against', 'under', 'among', 'before', 'after'];
+	var IDX = 432;
+	var HIT_ID = 61292;
+	var BRIDGING_RESULTS_UNFOLDED = [{'bridge': 0, 'complement': 18, 'preposition': 'by', 'coref_cluster': 5}, {'bridge': 0, 'complement': 5, 'preposition': 'by', 'coref_cluster': 5}, {'bridge': 0, 'complement': 6, 'preposition': 'by', 'coref_cluster': 5}, {'bridge': 0, 'complement': 3, 'preposition': 'about', 'coref_cluster': 3}, {'bridge': 0, 'complement': 2, 'preposition': 'about', 'coref_cluster': 2}, {'bridge': 0, 'complement': 1, 'preposition': 'for', 'coref_cluster': 1}, {'bridge': 0, 'complement': 1, 'preposition': 'about', 'coref_cluster': 1}, {'bridge': 2, 'complement': 1, 'preposition': 'of', 'coref_cluster': 1}, {'bridge': 3, 'complement': 23, 'preposition': 'member(s) of', 'coref_cluster': 17}, {'bridge': 3, 'complement': 19, 'preposition': 'of', 'coref_cluster': 13}, {'bridge': 3, 'complement': 1, 'preposition': 'of', 'coref_cluster': 1}, {'bridge': 5, 'complement': 0, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 9, 'complement': 8, 'preposition': 'of', 'coref_cluster': 6}, {'bridge': 9, 'complement': 16, 'preposition': 'of', 'coref_cluster': 6}, {'bridge': 9, 'complement': 13, 'preposition': 'of', 'coref_cluster': 6}, {'bridge': 9, 'complement': 7, 'preposition': 'of', 'coref_cluster': 6}, {'bridge': 10, 'complement': 8, 'preposition': 'of', 'coref_cluster': 6}, {'bridge': 10, 'complement': 16, 'preposition': 'of', 'coref_cluster': 6}, {'bridge': 10, 'complement': 13, 'preposition': 'of', 'coref_cluster': 6}, {'bridge': 10, 'complement': 7, 'preposition': 'of', 'coref_cluster': 6}, {'bridge': 11, 'complement': 8, 'preposition': 'of', 'coref_cluster': 6}, {'bridge': 11, 'complement': 16, 'preposition': 'of', 'coref_cluster': 6}, {'bridge': 11, 'complement': 13, 'preposition': 'of', 'coref_cluster': 6}, {'bridge': 11, 'complement': 7, 'preposition': 'of', 'coref_cluster': 6}, {'bridge': 14, 'complement': 15, 'preposition': 'of', 'coref_cluster': 19}, {'bridge': 15, 'complement': 14, 'preposition': 'in', 'coref_cluster': 11}, {'bridge': 15, 'complement': 8, 'preposition': 'of', 'coref_cluster': 6}, {'bridge': 15, 'complement': 16, 'preposition': 'of', 'coref_cluster': 6}, {'bridge': 15, 'complement': 13, 'preposition': 'of', 'coref_cluster': 6}, {'bridge': 15, 'complement': 7, 'preposition': 'of', 'coref_cluster': 6}, {'bridge': 23, 'complement': 1, 'preposition': 'for', 'coref_cluster': 1}, {'bridge': 24, 'complement': 1, 'preposition': 'of', 'coref_cluster': 1}];
+	var CURR_SPLIT_HIT_IDS = []
+	var BRIDGING_RESULTS = [];
+	var text = {'raw_text': 'LPT to skinny men, to have a good body shape just do the housework, clean everything then eat more than usual. Author: Awkwardly_Kenji zeradragon: "Sure, let me just start the dish washer, the washing machine, turn on the robot vacuum and mop...and now I gotta eat two bowls of noodles? I can\'t finish that..."  heavylead: "You spell women wrong."  Awkwardly_Kenji: "On mobile, butt thanks."  foreheadroot: "LPT: go workout. Everyday stuff like cleaning etc should NOT make your muscles ace." ', 'title': {'start_index': 0, 'end_index': 110}, 'subtitles': [{'start_index': 111, 'end_index': 134, 'id': 0}], 'paragraphs': [{'start_index': 135, 'end_index': 311, 'id': 0}, {'start_index': 312, 'end_index': 348, 'id': 1}, {'start_index': 349, 'end_index': 392, 'id': 2}, {'start_index': 393, 'end_index': 493, 'id': 3}], 'indents': [0, 0, 1, 0], 'paragraph_authors': ['zeradragon', 'heavylead', 'Awkwardly_Kenji', 'foreheadroot']};
+	var nps = [{'start_index': 0, 'text': 'LPT', 'end_index': 3, 'id': 0}, {'start_index': 14, 'text': 'men', 'end_index': 17, 'id': 1}, {'start_index': 27, 'text': 'a good body shape', 'end_index': 44, 'id': 2}, {'start_index': 53, 'text': 'the housework', 'end_index': 66, 'id': 3}, {'start_index': 74, 'text': 'everything', 'end_index': 84, 'id': 4}, {'start_index': 111, 'text': 'Author', 'end_index': 117, 'id': 5}, {'start_index': 119, 'text': 'Awkwardly_Kenji', 'end_index': 134, 'id': 6}, {'start_index': 135, 'text': 'zeradragon', 'end_index': 145, 'id': 7}, {'start_index': 158, 'text': 'me', 'end_index': 160, 'id': 8}, {'start_index': 172, 'text': 'the dish washer', 'end_index': 187, 'id': 9}, {'start_index': 189, 'text': 'the washing machine', 'end_index': 208, 'id': 10}, {'start_index': 218, 'text': 'the robot vacuum', 'end_index': 234, 'id': 11}, {'start_index': 239, 'text': 'mop', 'end_index': 242, 'id': 12}, {'start_index': 253, 'text': 'I', 'end_index': 254, 'id': 13}, {'start_index': 265, 'text': 'two bowls', 'end_index': 274, 'id': 14}, {'start_index': 278, 'text': 'noodles', 'end_index': 285, 'id': 15}, {'start_index': 287, 'text': 'I', 'end_index': 288, 'id': 16}, {'start_index': 312, 'text': 'heavylead', 'end_index': 321, 'id': 17}, {'start_index': 324, 'text': 'You', 'end_index': 327, 'id': 18}, {'start_index': 334, 'text': 'women', 'end_index': 339, 'id': 19}, {'start_index': 370, 'text': 'mobile, butt', 'end_index': 382, 'id': 20}, {'start_index': 393, 'text': 'foreheadroot', 'end_index': 405, 'id': 21}, {'start_index': 416, 'text': 'workout', 'end_index': 423, 'id': 22}, {'start_index': 425, 'text': 'Everyday stuff', 'end_index': 439, 'id': 23}, {'start_index': 474, 'text': 'your muscles', 'end_index': 486, 'id': 24}];
+	var coref = [{'id': 0, 'members': [0]}, {'id': 1, 'members': [1]}, {'id': 2, 'members': [2]}, {'id': 3, 'members': [3]}, {'id': 4, 'members': [4]}, {'id': 5, 'members': [18, 5, 6]}, {'id': 6, 'members': [8, 16, 13, 7]}, {'id': 7, 'members': [9]}, {'id': 8, 'members': [10]}, {'id': 9, 'members': [11]}, {'id': 10, 'members': [12]}, {'id': 11, 'members': [14]}, {'id': 12, 'members': [17]}, {'id': 13, 'members': [19]}, {'id': 14, 'members': [20]}, {'id': 15, 'members': [21]}, {'id': 16, 'members': [22]}, {'id': 17, 'members': [23]}, {'id': 18, 'members': [24]}, {'id': 19, 'members': [15]}];
+	var bridges = [];
+	var current_np_id = 0;
+	var url = 'N/A';
+	</script>
+	<script src='ood_ids.js'></script>
+	<script src='bridging_exploration.js'></script>
+	<script src="https://cdn.jsdelivr.net/npm/ractive"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
+</head>
+
+<body>
+<div id="page">
+	<script src='data_init.js'></script>
+</div>	
+</body>
+
+
+</html>

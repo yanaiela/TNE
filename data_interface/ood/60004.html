@@ -1,0 +1,35 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>BridgingExplorationTool</title>
+	<link rel="stylesheet" href="styles.css">
+	<script type="text/javascript">
+	var COLORS = ["#8cffd8", "#FF7F50", "#6495ED", "#BDB76B", "#DDA0DD", "#FF69B4", "#FFD700", "#F5DEB3"];
+	var PREPS = ['of', 'in', 'to', 'for', 'with', 'on', 'at', 'from', 'by', 'about', 'over', 'between', 'against', 'under', 'among', 'before', 'after'];
+	var IDX = 386;
+	var HIT_ID = 60004;
+	var BRIDGING_RESULTS_UNFOLDED = [{'bridge': 1, 'complement': 2, 'preposition': 'about', 'coref_cluster': 2}, {'bridge': 1, 'complement': 13, 'preposition': 'about', 'coref_cluster': 2}, {'bridge': 1, 'complement': 0, 'preposition': 'for', 'coref_cluster': 0}, {'bridge': 3, 'complement': 0, 'preposition': 'member(s) of', 'coref_cluster': 0}, {'bridge': 4, 'complement': 5, 'preposition': 'with', 'coref_cluster': 5}, {'bridge': 4, 'complement': 2, 'preposition': 'about', 'coref_cluster': 2}, {'bridge': 4, 'complement': 13, 'preposition': 'about', 'coref_cluster': 2}, {'bridge': 4, 'complement': 0, 'preposition': 'for', 'coref_cluster': 0}, {'bridge': 5, 'complement': 6, 'preposition': 'in', 'coref_cluster': 6}, {'bridge': 5, 'complement': 4, 'preposition': 'in', 'coref_cluster': 4}, {'bridge': 5, 'complement': 2, 'preposition': 'about', 'coref_cluster': 2}, {'bridge': 5, 'complement': 13, 'preposition': 'about', 'coref_cluster': 2}, {'bridge': 5, 'complement': 0, 'preposition': 'for', 'coref_cluster': 0}, {'bridge': 5, 'complement': 1, 'preposition': 'member(s) of', 'coref_cluster': 1}, {'bridge': 5, 'complement': 9, 'preposition': 'member(s) of', 'coref_cluster': 1}, {'bridge': 6, 'complement': 4, 'preposition': 'of', 'coref_cluster': 4}, {'bridge': 6, 'complement': 2, 'preposition': 'about', 'coref_cluster': 2}, {'bridge': 6, 'complement': 13, 'preposition': 'about', 'coref_cluster': 2}, {'bridge': 8, 'complement': 10, 'preposition': 'from', 'coref_cluster': 9}, {'bridge': 8, 'complement': 2, 'preposition': 'about', 'coref_cluster': 2}, {'bridge': 8, 'complement': 13, 'preposition': 'about', 'coref_cluster': 2}, {'bridge': 9, 'complement': 2, 'preposition': 'about', 'coref_cluster': 2}, {'bridge': 9, 'complement': 13, 'preposition': 'about', 'coref_cluster': 2}, {'bridge': 9, 'complement': 0, 'preposition': 'for', 'coref_cluster': 0}, {'bridge': 10, 'complement': 8, 'preposition': 'for', 'coref_cluster': 8}, {'bridge': 10, 'complement': 2, 'preposition': 'about', 'coref_cluster': 2}, {'bridge': 10, 'complement': 13, 'preposition': 'about', 'coref_cluster': 2}];
+	var CURR_SPLIT_HIT_IDS = []
+	var BRIDGING_RESULTS = [];
+	var text = {'raw_text': 'Can you guys answer some questions about bioenergy? Author: DuckMeister12 albasri: "Please make a post with the actual question in the title. You can find the answer to some of your questions with a simple Google search."  electric_ionland: "What do you mean by bioenergy?"  DuckMeister12: "Bio electricity :)" ', 'title': {'start_index': 0, 'end_index': 51}, 'subtitles': [{'start_index': 52, 'end_index': 73, 'id': 0}], 'paragraphs': [{'start_index': 74, 'end_index': 222, 'id': 0}, {'start_index': 223, 'end_index': 274, 'id': 1}, {'start_index': 275, 'end_index': 311, 'id': 2}], 'indents': [0, 0, 1], 'paragraph_authors': ['albasri', 'electric_ionland', 'DuckMeister12']};
+	var nps = [{'start_index': 4, 'text': 'you guys', 'end_index': 12, 'id': 0}, {'start_index': 20, 'text': 'some questions', 'end_index': 34, 'id': 1}, {'start_index': 41, 'text': 'bioenergy', 'end_index': 50, 'id': 2}, {'start_index': 74, 'text': 'albasri', 'end_index': 81, 'id': 3}, {'start_index': 96, 'text': 'a post', 'end_index': 102, 'id': 4}, {'start_index': 108, 'text': 'the actual question', 'end_index': 127, 'id': 5}, {'start_index': 131, 'text': 'the title', 'end_index': 140, 'id': 6}, {'start_index': 142, 'text': 'You', 'end_index': 145, 'id': 7}, {'start_index': 155, 'text': 'the answer', 'end_index': 165, 'id': 8}, {'start_index': 177, 'text': 'your questions', 'end_index': 191, 'id': 9}, {'start_index': 197, 'text': 'a simple Google search', 'end_index': 219, 'id': 10}, {'start_index': 242, 'text': 'What', 'end_index': 246, 'id': 11}, {'start_index': 250, 'text': 'you', 'end_index': 253, 'id': 12}, {'start_index': 262, 'text': 'bioenergy', 'end_index': 271, 'id': 13}, {'start_index': 275, 'text': 'DuckMeister12: "Bio electricity', 'end_index': 306, 'id': 14}];
+	var coref = [{'id': 0, 'members': [0]}, {'id': 1, 'members': [1, 9]}, {'id': 2, 'members': [2, 13]}, {'id': 3, 'members': [3]}, {'id': 4, 'members': [4]}, {'id': 5, 'members': [5]}, {'id': 6, 'members': [6]}, {'id': 7, 'members': [12, 7]}, {'id': 8, 'members': [8]}, {'id': 9, 'members': [10]}, {'id': 10, 'members': [11]}, {'id': 11, 'members': [14]}];
+	var bridges = [];
+	var current_np_id = 0;
+	var url = 'N/A';
+	</script>
+	<script src='ood_ids.js'></script>
+	<script src='bridging_exploration.js'></script>
+	<script src="https://cdn.jsdelivr.net/npm/ractive"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
+</head>
+
+<body>
+<div id="page">
+	<script src='data_init.js'></script>
+</div>	
+</body>
+
+
+</html>

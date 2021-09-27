@@ -1,0 +1,35 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>BridgingExplorationTool</title>
+	<link rel="stylesheet" href="styles.css">
+	<script type="text/javascript">
+	var COLORS = ["#8cffd8", "#FF7F50", "#6495ED", "#BDB76B", "#DDA0DD", "#FF69B4", "#FFD700", "#F5DEB3"];
+	var PREPS = ['of', 'in', 'to', 'for', 'with', 'on', 'at', 'from', 'by', 'about', 'over', 'between', 'against', 'under', 'among', 'before', 'after'];
+	var IDX = 366;
+	var HIT_ID = 60006;
+	var BRIDGING_RESULTS_UNFOLDED = [{'bridge': 3, 'complement': 4, 'preposition': 'of', 'coref_cluster': 2}, {'bridge': 0, 'complement': 18, 'preposition': 'of', 'coref_cluster': 9}, {'bridge': 0, 'complement': 19, 'preposition': 'of', 'coref_cluster': 9}, {'bridge': 0, 'complement': 13, 'preposition': 'of', 'coref_cluster': 9}, {'bridge': 0, 'complement': 14, 'preposition': 'of', 'coref_cluster': 9}, {'bridge': 0, 'complement': 8, 'preposition': 'of', 'coref_cluster': 6}, {'bridge': 0, 'complement': 7, 'preposition': 'of', 'coref_cluster': 5}, {'bridge': 8, 'complement': 9, 'preposition': 'in', 'coref_cluster': 7}, {'bridge': 9, 'complement': 0, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 9, 'complement': 10, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 9, 'complement': 16, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 10, 'complement': 18, 'preposition': 'of', 'coref_cluster': 9}, {'bridge': 10, 'complement': 19, 'preposition': 'of', 'coref_cluster': 9}, {'bridge': 10, 'complement': 13, 'preposition': 'of', 'coref_cluster': 9}, {'bridge': 10, 'complement': 14, 'preposition': 'of', 'coref_cluster': 9}, {'bridge': 10, 'complement': 8, 'preposition': 'of', 'coref_cluster': 6}, {'bridge': 10, 'complement': 7, 'preposition': 'of', 'coref_cluster': 5}, {'bridge': 15, 'complement': 0, 'preposition': 'to', 'coref_cluster': 0}, {'bridge': 15, 'complement': 10, 'preposition': 'to', 'coref_cluster': 0}, {'bridge': 15, 'complement': 16, 'preposition': 'to', 'coref_cluster': 0}, {'bridge': 16, 'complement': 18, 'preposition': 'of', 'coref_cluster': 9}, {'bridge': 16, 'complement': 19, 'preposition': 'of', 'coref_cluster': 9}, {'bridge': 16, 'complement': 13, 'preposition': 'of', 'coref_cluster': 9}, {'bridge': 16, 'complement': 14, 'preposition': 'of', 'coref_cluster': 9}, {'bridge': 16, 'complement': 8, 'preposition': 'of', 'coref_cluster': 6}, {'bridge': 16, 'complement': 7, 'preposition': 'of', 'coref_cluster': 5}];
+	var CURR_SPLIT_HIT_IDS = []
+	var BRIDGING_RESULTS = [];
+	var text = {'raw_text': 'To an observer, do you slow down as you approach the speed of light? Author: Sealarkspur RobusEtCeleritas: "Your speed doesn’t decrease, but your clocks tick slower in the rest frame of the observer."  Midtek: "No. If you are moving at speed *v* with respect to some observer then you appear to be moving... at speed *v*." ', 'title': {'start_index': 0, 'end_index': 68}, 'subtitles': [{'start_index': 69, 'end_index': 88, 'id': 0}], 'paragraphs': [{'start_index': 89, 'end_index': 201, 'id': 0}, {'start_index': 202, 'end_index': 323, 'id': 1}], 'indents': [0, 0], 'paragraph_authors': ['RobusEtCeleritas', 'Midtek']};
+	var nps = [{'start_index': 3, 'text': 'an observer', 'end_index': 14, 'id': 0}, {'start_index': 19, 'text': 'you', 'end_index': 22, 'id': 1}, {'start_index': 36, 'text': 'you', 'end_index': 39, 'id': 2}, {'start_index': 49, 'text': 'the speed', 'end_index': 58, 'id': 3}, {'start_index': 62, 'text': 'light', 'end_index': 67, 'id': 4}, {'start_index': 77, 'text': 'Sealarkspur', 'end_index': 88, 'id': 5}, {'start_index': 89, 'text': 'RobusEtCeleritas', 'end_index': 105, 'id': 6}, {'start_index': 108, 'text': 'Your speed', 'end_index': 118, 'id': 7}, {'start_index': 141, 'text': 'your clocks', 'end_index': 152, 'id': 8}, {'start_index': 168, 'text': 'the rest frame', 'end_index': 182, 'id': 9}, {'start_index': 186, 'text': 'the observer', 'end_index': 198, 'id': 10}, {'start_index': 202, 'text': 'Midtek', 'end_index': 208, 'id': 11}, {'start_index': 218, 'text': 'you', 'end_index': 221, 'id': 12}, {'start_index': 236, 'text': 'speed', 'end_index': 241, 'id': 13}, {'start_index': 243, 'text': 'v', 'end_index': 244, 'id': 14}, {'start_index': 251, 'text': 'respect', 'end_index': 258, 'id': 15}, {'start_index': 262, 'text': 'some observer', 'end_index': 275, 'id': 16}, {'start_index': 281, 'text': 'you', 'end_index': 284, 'id': 17}, {'start_index': 311, 'text': 'speed', 'end_index': 316, 'id': 18}, {'start_index': 317, 'text': '*v', 'end_index': 319, 'id': 19}];
+	var coref = [{'id': 0, 'members': [0, 10, 16]}, {'id': 1, 'members': [3]}, {'id': 2, 'members': [4]}, {'id': 3, 'members': [5]}, {'id': 4, 'members': [6]}, {'id': 5, 'members': [7]}, {'id': 6, 'members': [8]}, {'id': 7, 'members': [9]}, {'id': 8, 'members': [11]}, {'id': 9, 'members': [18, 19, 13, 14]}, {'id': 10, 'members': [15]}, {'id': 11, 'members': [1, 2, 12, 17]}];
+	var bridges = [];
+	var current_np_id = 0;
+	var url = 'N/A';
+	</script>
+	<script src='ood_ids.js'></script>
+	<script src='bridging_exploration.js'></script>
+	<script src="https://cdn.jsdelivr.net/npm/ractive"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
+</head>
+
+<body>
+<div id="page">
+	<script src='data_init.js'></script>
+</div>	
+</body>
+
+
+</html>

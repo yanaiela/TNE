@@ -1,0 +1,35 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>BridgingExplorationTool</title>
+	<link rel="stylesheet" href="styles.css">
+	<script type="text/javascript">
+	var COLORS = ["#8cffd8", "#FF7F50", "#6495ED", "#BDB76B", "#DDA0DD", "#FF69B4", "#FFD700", "#F5DEB3"];
+	var PREPS = ['of', 'in', 'to', 'for', 'with', 'on', 'at', 'from', 'by', 'about', 'over', 'between', 'against', 'under', 'among', 'before', 'after'];
+	var IDX = 417;
+	var HIT_ID = 61188;
+	var BRIDGING_RESULTS_UNFOLDED = [{'bridge': 0, 'complement': 2, 'preposition': 'by', 'coref_cluster': 2}, {'bridge': 0, 'complement': 3, 'preposition': 'by', 'coref_cluster': 2}, {'bridge': 0, 'complement': 1, 'preposition': 'about', 'coref_cluster': 1}, {'bridge': 2, 'complement': 0, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 2, 'complement': 25, 'preposition': 'of', 'coref_cluster': 20}, {'bridge': 5, 'complement': 7, 'preposition': 'before', 'coref_cluster': 5}, {'bridge': 7, 'complement': 26, 'preposition': 'of', 'coref_cluster': 21}, {'bridge': 8, 'complement': 26, 'preposition': 'of', 'coref_cluster': 21}, {'bridge': 10, 'complement': 26, 'preposition': 'of', 'coref_cluster': 21}, {'bridge': 12, 'complement': 2, 'preposition': 'by', 'coref_cluster': 2}, {'bridge': 12, 'complement': 3, 'preposition': 'by', 'coref_cluster': 2}, {'bridge': 12, 'complement': 1, 'preposition': 'about', 'coref_cluster': 1}, {'bridge': 12, 'complement': 0, 'preposition': 'in', 'coref_cluster': 0}, {'bridge': 16, 'complement': 15, 'preposition': 'from', 'coref_cluster': 10}, {'bridge': 16, 'complement': 13, 'preposition': 'for', 'coref_cluster': 9}, {'bridge': 16, 'complement': 14, 'preposition': 'for', 'coref_cluster': 9}, {'bridge': 17, 'complement': 18, 'preposition': 'with', 'coref_cluster': 13}, {'bridge': 17, 'complement': 15, 'preposition': 'about', 'coref_cluster': 10}, {'bridge': 18, 'complement': 17, 'preposition': 'of', 'coref_cluster': 12}, {'bridge': 20, 'complement': 21, 'preposition': 'of', 'coref_cluster': 16}, {'bridge': 20, 'complement': 17, 'preposition': 'of', 'coref_cluster': 12}, {'bridge': 21, 'complement': 22, 'preposition': 'by', 'coref_cluster': 17}, {'bridge': 21, 'complement': 17, 'preposition': 'member(s) of', 'coref_cluster': 12}, {'bridge': 21, 'complement': 15, 'preposition': 'about', 'coref_cluster': 10}, {'bridge': 22, 'complement': 15, 'preposition': 'of', 'coref_cluster': 10}, {'bridge': 24, 'complement': 23, 'preposition': 'for', 'coref_cluster': 18}, {'bridge': 24, 'complement': 2, 'preposition': 'from', 'coref_cluster': 2}, {'bridge': 24, 'complement': 3, 'preposition': 'from', 'coref_cluster': 2}, {'bridge': 24, 'complement': 1, 'preposition': 'about', 'coref_cluster': 1}, {'bridge': 24, 'complement': 0, 'preposition': 'in', 'coref_cluster': 0}];
+	var CURR_SPLIT_HIT_IDS = []
+	var BRIDGING_RESULTS = [];
+	var text = {'raw_text': 'Monday Methods: How to Read an Academic Book Author: sunagainstgold breakpointsaved: "This takes me right back to the months I was reading for my PhD orals (non-academic friends: "you read forty books this week? are you crazy or lying?") Excellent post. "  wellknownname: "I read history for fun, but there are certainly academic works with good reputations that are also easy to read. Does anyone have a list of very well written books by leading academics?"  Hergrim: "This is a godsend. " ', 'title': {'start_index': 0, 'end_index': 44}, 'subtitles': [{'start_index': 45, 'end_index': 67, 'id': 0}], 'paragraphs': [{'start_index': 68, 'end_index': 256, 'id': 0}, {'start_index': 257, 'end_index': 460, 'id': 1}, {'start_index': 461, 'end_index': 492, 'id': 2}], 'indents': [0, 0, 0], 'paragraph_authors': ['breakpointsaved', 'wellknownname', 'Hergrim']};
+	var nps = [{'start_index': 0, 'text': 'Monday Methods', 'end_index': 14, 'id': 0}, {'start_index': 28, 'text': 'an Academic Book', 'end_index': 44, 'id': 1}, {'start_index': 45, 'text': 'Author', 'end_index': 51, 'id': 2}, {'start_index': 53, 'text': 'sunagainstgold', 'end_index': 67, 'id': 3}, {'start_index': 97, 'text': 'me', 'end_index': 99, 'id': 4}, {'start_index': 114, 'text': 'the months', 'end_index': 124, 'id': 5}, {'start_index': 125, 'text': 'I', 'end_index': 126, 'id': 6}, {'start_index': 143, 'text': 'my PhD orals', 'end_index': 155, 'id': 7}, {'start_index': 157, 'text': 'non-academic friends', 'end_index': 177, 'id': 8}, {'start_index': 180, 'text': 'you', 'end_index': 183, 'id': 9}, {'start_index': 189, 'text': 'forty books', 'end_index': 200, 'id': 10}, {'start_index': 216, 'text': 'you', 'end_index': 219, 'id': 11}, {'start_index': 238, 'text': 'Excellent post', 'end_index': 252, 'id': 12}, {'start_index': 257, 'text': 'wellknownname', 'end_index': 270, 'id': 13}, {'start_index': 273, 'text': 'I', 'end_index': 274, 'id': 14}, {'start_index': 280, 'text': 'history', 'end_index': 287, 'id': 15}, {'start_index': 292, 'text': 'fun', 'end_index': 295, 'id': 16}, {'start_index': 321, 'text': 'academic works', 'end_index': 335, 'id': 17}, {'start_index': 341, 'text': 'good reputations', 'end_index': 357, 'id': 18}, {'start_index': 391, 'text': 'anyone', 'end_index': 397, 'id': 19}, {'start_index': 403, 'text': 'a list', 'end_index': 409, 'id': 20}, {'start_index': 413, 'text': 'very well written books', 'end_index': 436, 'id': 21}, {'start_index': 440, 'text': 'leading academics', 'end_index': 457, 'id': 22}, {'start_index': 461, 'text': 'Hergrim', 'end_index': 468, 'id': 23}, {'start_index': 479, 'text': 'a godsend', 'end_index': 488, 'id': 24}, {'end_index': 44, 'start_index': 16, 'text': 'How to Read an Academic Book', 'id': 25}, {'end_index': 83, 'start_index': 68, 'text': 'breakpointsaved', 'id': 26}];
+	var coref = [{'id': 0, 'members': [0]}, {'id': 1, 'members': [1]}, {'id': 2, 'members': [2, 3]}, {'id': 3, 'members': [4, 6, 9, 11]}, {'id': 4, 'members': [5]}, {'id': 5, 'members': [7]}, {'id': 6, 'members': [8]}, {'id': 7, 'members': [10]}, {'id': 8, 'members': [12]}, {'id': 9, 'members': [13, 14]}, {'id': 10, 'members': [15]}, {'id': 11, 'members': [16]}, {'id': 12, 'members': [17]}, {'id': 13, 'members': [18]}, {'id': 14, 'members': [19]}, {'id': 15, 'members': [20]}, {'id': 16, 'members': [21]}, {'id': 17, 'members': [22]}, {'id': 18, 'members': [23]}, {'id': 19, 'members': [24]}, {'id': 20, 'members': [25]}, {'id': 21, 'members': [26]}];
+	var bridges = [];
+	var current_np_id = 0;
+	var url = 'N/A';
+	</script>
+	<script src='ood_ids.js'></script>
+	<script src='bridging_exploration.js'></script>
+	<script src="https://cdn.jsdelivr.net/npm/ractive"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
+</head>
+
+<body>
+<div id="page">
+	<script src='data_init.js'></script>
+</div>	
+</body>
+
+
+</html>

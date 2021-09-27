@@ -1,0 +1,35 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>BridgingExplorationTool</title>
+	<link rel="stylesheet" href="styles.css">
+	<script type="text/javascript">
+	var COLORS = ["#8cffd8", "#FF7F50", "#6495ED", "#BDB76B", "#DDA0DD", "#FF69B4", "#FFD700", "#F5DEB3"];
+	var PREPS = ['of', 'in', 'to', 'for', 'with', 'on', 'at', 'from', 'by', 'about', 'over', 'between', 'against', 'under', 'among', 'before', 'after'];
+	var IDX = 3371;
+	var HIT_ID = 2889;
+	var BRIDGING_RESULTS_UNFOLDED = [{'bridge': 2, 'complement': 8, 'preposition': 'against', 'coref_cluster': 6}, {'bridge': 2, 'complement': 25, 'preposition': 'against', 'coref_cluster': 6}, {'bridge': 2, 'complement': 8, 'preposition': 'in', 'coref_cluster': 6}, {'bridge': 2, 'complement': 25, 'preposition': 'in', 'coref_cluster': 6}, {'bridge': 3, 'complement': 1, 'preposition': 'of', 'coref_cluster': 1}, {'bridge': 3, 'complement': 6, 'preposition': 'of', 'coref_cluster': 1}, {'bridge': 3, 'complement': 10, 'preposition': 'of', 'coref_cluster': 1}, {'bridge': 3, 'complement': 12, 'preposition': 'of', 'coref_cluster': 1}, {'bridge': 3, 'complement': 14, 'preposition': 'of', 'coref_cluster': 1}, {'bridge': 3, 'complement': 15, 'preposition': 'of', 'coref_cluster': 1}, {'bridge': 3, 'complement': 17, 'preposition': 'of', 'coref_cluster': 1}, {'bridge': 4, 'complement': 5, 'preposition': 'by', 'coref_cluster': 5}, {'bridge': 4, 'complement': 16, 'preposition': 'by', 'coref_cluster': 5}, {'bridge': 4, 'complement': 0, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 4, 'complement': 18, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 4, 'complement': 20, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 4, 'complement': 21, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 7, 'complement': 8, 'preposition': 'against', 'coref_cluster': 6}, {'bridge': 7, 'complement': 25, 'preposition': 'against', 'coref_cluster': 6}, {'bridge': 7, 'complement': 8, 'preposition': 'in', 'coref_cluster': 6}, {'bridge': 7, 'complement': 25, 'preposition': 'in', 'coref_cluster': 6}, {'bridge': 11, 'complement': 0, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 11, 'complement': 18, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 11, 'complement': 20, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 11, 'complement': 21, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 11, 'complement': 5, 'preposition': 'by', 'coref_cluster': 5}, {'bridge': 11, 'complement': 16, 'preposition': 'by', 'coref_cluster': 5}, {'bridge': 22, 'complement': 5, 'preposition': 'by', 'coref_cluster': 5}, {'bridge': 22, 'complement': 16, 'preposition': 'by', 'coref_cluster': 5}, {'bridge': 22, 'complement': 0, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 22, 'complement': 18, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 22, 'complement': 20, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 22, 'complement': 21, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 24, 'complement': 8, 'preposition': 'on', 'coref_cluster': 6}, {'bridge': 24, 'complement': 25, 'preposition': 'on', 'coref_cluster': 6}, {'bridge': 24, 'complement': 8, 'preposition': 'about', 'coref_cluster': 6}, {'bridge': 24, 'complement': 25, 'preposition': 'about', 'coref_cluster': 6}, {'bridge': 24, 'complement': 2, 'preposition': 'about', 'coref_cluster': 2}, {'bridge': 24, 'complement': 7, 'preposition': 'about', 'coref_cluster': 2}];
+	var CURR_SPLIT_HIT_IDS = []
+	var BRIDGING_RESULTS = [];
+	var text = {'raw_text': 'Blunkett: Brown supported Iraq war to save job October 12, 2006 The Blunkett diaries, being serialised in the Guardian, claim that Gordon Brown opposed the war against Iraq. Only at the last minute did he give in, according to the diaries, when he realised that Blair would sack him otherwise. Gordon Brown, interviewed by the Guardian, said he did not think Blunkett had ever said such a thing and that, if he was reported as having done so, he was being misquoted. The diary entries are contemporary with the events and were recorded shortly after the Cabinet meeting on Iraq.', 'title': {'start_index': 0, 'end_index': 46}, 'subtitles': [{'start_index': 47, 'end_index': 63, 'id': 0}], 'paragraphs': [{'start_index': 64, 'end_index': 293, 'id': 0}, {'start_index': 294, 'end_index': 466, 'id': 1}, {'start_index': 467, 'end_index': 578, 'id': 2}]};
+	var nps = [{'start_index': 0, 'text': 'Blunkett', 'end_index': 8, 'id': 0}, {'start_index': 10, 'text': 'Brown', 'end_index': 15, 'id': 1}, {'start_index': 26, 'text': 'Iraq war', 'end_index': 34, 'id': 2}, {'start_index': 43, 'text': 'job', 'end_index': 46, 'id': 3}, {'start_index': 64, 'text': 'The Blunkett diaries', 'end_index': 84, 'id': 4}, {'start_index': 106, 'text': 'the Guardian', 'end_index': 118, 'id': 5}, {'start_index': 131, 'text': 'Gordon Brown', 'end_index': 143, 'id': 6}, {'start_index': 152, 'text': 'the war', 'end_index': 159, 'id': 7}, {'start_index': 168, 'text': 'Iraq', 'end_index': 172, 'id': 8}, {'start_index': 182, 'text': 'the last minute', 'end_index': 197, 'id': 9}, {'start_index': 202, 'text': 'he', 'end_index': 204, 'id': 10}, {'start_index': 227, 'text': 'the diaries', 'end_index': 238, 'id': 11}, {'start_index': 245, 'text': 'he', 'end_index': 247, 'id': 12}, {'start_index': 262, 'text': 'Blair', 'end_index': 267, 'id': 13}, {'start_index': 279, 'text': 'him', 'end_index': 282, 'id': 14}, {'start_index': 294, 'text': 'Gordon Brown', 'end_index': 306, 'id': 15}, {'start_index': 323, 'text': 'the Guardian', 'end_index': 335, 'id': 16}, {'start_index': 342, 'text': 'he', 'end_index': 344, 'id': 17}, {'start_index': 359, 'text': 'Blunkett', 'end_index': 367, 'id': 18}, {'start_index': 382, 'text': 'such a thing', 'end_index': 394, 'id': 19}, {'start_index': 408, 'text': 'he', 'end_index': 410, 'id': 20}, {'start_index': 443, 'text': 'he', 'end_index': 445, 'id': 21}, {'start_index': 467, 'text': 'The diary entries', 'end_index': 484, 'id': 22}, {'start_index': 507, 'text': 'the events', 'end_index': 517, 'id': 23}, {'start_index': 550, 'text': 'the Cabinet meeting', 'end_index': 569, 'id': 24}, {'start_index': 573, 'text': 'Iraq', 'end_index': 577, 'id': 25}];
+	var coref = [{'id': 0, 'members': [0, 18, 20, 21]}, {'id': 1, 'members': [1, 6, 10, 12, 14, 15, 17]}, {'id': 2, 'members': [2, 7]}, {'id': 3, 'members': [3]}, {'id': 4, 'members': [4, 11, 22]}, {'id': 5, 'members': [5, 16]}, {'id': 6, 'members': [8, 25]}, {'id': 7, 'members': [9]}, {'id': 8, 'members': [13]}, {'id': 9, 'members': [19]}, {'id': 10, 'members': [23]}, {'id': 11, 'members': [24]}];
+	var bridges = [];
+	var current_np_id = 0;
+	var url = 'N/A';
+	</script>
+	<script src='train_ids.js'></script>
+	<script src='bridging_exploration.js'></script>
+	<script src="https://cdn.jsdelivr.net/npm/ractive"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
+</head>
+
+<body>
+<div id="page">
+	<script src='data_init.js'></script>
+</div>	
+</body>
+
+
+</html>

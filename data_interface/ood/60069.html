@@ -1,0 +1,35 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>BridgingExplorationTool</title>
+	<link rel="stylesheet" href="styles.css">
+	<script type="text/javascript">
+	var COLORS = ["#8cffd8", "#FF7F50", "#6495ED", "#BDB76B", "#DDA0DD", "#FF69B4", "#FFD700", "#F5DEB3"];
+	var PREPS = ['of', 'in', 'to', 'for', 'with', 'on', 'at', 'from', 'by', 'about', 'over', 'between', 'against', 'under', 'among', 'before', 'after'];
+	var IDX = 379;
+	var HIT_ID = 60069;
+	var BRIDGING_RESULTS_UNFOLDED = [{'bridge': 0, 'complement': 16, 'preposition': 'for', 'coref_cluster': 2}, {'bridge': 0, 'complement': 2, 'preposition': 'for', 'coref_cluster': 2}, {'bridge': 0, 'complement': 3, 'preposition': 'for', 'coref_cluster': 2}, {'bridge': 0, 'complement': 20, 'preposition': 'for', 'coref_cluster': 2}, {'bridge': 0, 'complement': 1, 'preposition': 'in', 'coref_cluster': 1}, {'bridge': 1, 'complement': 16, 'preposition': 'of', 'coref_cluster': 2}, {'bridge': 1, 'complement': 2, 'preposition': 'of', 'coref_cluster': 2}, {'bridge': 1, 'complement': 3, 'preposition': 'of', 'coref_cluster': 2}, {'bridge': 1, 'complement': 20, 'preposition': 'of', 'coref_cluster': 2}, {'bridge': 6, 'complement': 15, 'preposition': 'about', 'coref_cluster': 13}, {'bridge': 6, 'complement': 1, 'preposition': 'about', 'coref_cluster': 1}, {'bridge': 8, 'complement': 9, 'preposition': 'of', 'coref_cluster': 8}, {'bridge': 8, 'complement': 17, 'preposition': 'of', 'coref_cluster': 8}, {'bridge': 9, 'complement': 16, 'preposition': 'of', 'coref_cluster': 2}, {'bridge': 9, 'complement': 2, 'preposition': 'of', 'coref_cluster': 2}, {'bridge': 9, 'complement': 3, 'preposition': 'of', 'coref_cluster': 2}, {'bridge': 9, 'complement': 20, 'preposition': 'of', 'coref_cluster': 2}, {'bridge': 11, 'complement': 15, 'preposition': 'in', 'coref_cluster': 13}, {'bridge': 12, 'complement': 15, 'preposition': 'in', 'coref_cluster': 13}, {'bridge': 13, 'complement': 15, 'preposition': 'in', 'coref_cluster': 13}, {'bridge': 14, 'complement': 15, 'preposition': 'in', 'coref_cluster': 13}, {'bridge': 18, 'complement': 15, 'preposition': 'about', 'coref_cluster': 13}, {'bridge': 18, 'complement': 16, 'preposition': 'of', 'coref_cluster': 2}, {'bridge': 18, 'complement': 2, 'preposition': 'of', 'coref_cluster': 2}, {'bridge': 18, 'complement': 3, 'preposition': 'of', 'coref_cluster': 2}, {'bridge': 18, 'complement': 20, 'preposition': 'of', 'coref_cluster': 2}, {'bridge': 19, 'complement': 15, 'preposition': 'in', 'coref_cluster': 13}, {'bridge': 19, 'complement': 9, 'preposition': 'in', 'coref_cluster': 8}, {'bridge': 19, 'complement': 17, 'preposition': 'in', 'coref_cluster': 8}, {'bridge': 19, 'complement': 16, 'preposition': 'with', 'coref_cluster': 2}, {'bridge': 19, 'complement': 2, 'preposition': 'with', 'coref_cluster': 2}, {'bridge': 19, 'complement': 3, 'preposition': 'with', 'coref_cluster': 2}, {'bridge': 19, 'complement': 20, 'preposition': 'with', 'coref_cluster': 2}, {'bridge': 23, 'complement': 19, 'preposition': 'about', 'coref_cluster': 15}, {'bridge': 23, 'complement': 15, 'preposition': 'about', 'coref_cluster': 13}, {'bridge': 23, 'complement': 16, 'preposition': 'of', 'coref_cluster': 2}, {'bridge': 23, 'complement': 2, 'preposition': 'of', 'coref_cluster': 2}, {'bridge': 23, 'complement': 3, 'preposition': 'of', 'coref_cluster': 2}, {'bridge': 23, 'complement': 20, 'preposition': 'of', 'coref_cluster': 2}];
+	var CURR_SPLIT_HIT_IDS = []
+	var BRIDGING_RESULTS = [];
+	var text = {'raw_text': 'Dealing with a loss in the family. Author: Zenth93 MisterBlizno: "He existed. That\'s an amazing thing! Just glory in every minute of your life and remember that he had adventures, loves, trials and triumphs in his life as you do in yours."  papops: "Focus your thoughts on the good times that you spent with him.  That way his \'spirit\' will live on in your thoughts." ', 'title': {'start_index': 0, 'end_index': 34}, 'subtitles': [{'start_index': 35, 'end_index': 50, 'id': 0}], 'paragraphs': [{'start_index': 51, 'end_index': 240, 'id': 0}, {'start_index': 241, 'end_index': 368, 'id': 1}], 'indents': [0, 0], 'paragraph_authors': ['MisterBlizno', 'papops']};
+	var nps = [{'start_index': 13, 'text': 'a loss', 'end_index': 19, 'id': 0}, {'start_index': 23, 'text': 'the family', 'end_index': 33, 'id': 1}, {'start_index': 35, 'text': 'Author', 'end_index': 41, 'id': 2}, {'start_index': 41, 'text': ': Zenth93', 'end_index': 50, 'id': 3}, {'start_index': 51, 'text': 'MisterBlizno', 'end_index': 63, 'id': 4}, {'start_index': 66, 'text': 'He', 'end_index': 68, 'id': 5}, {'start_index': 85, 'text': 'an amazing thing', 'end_index': 101, 'id': 6}, {'start_index': 103, 'text': 'Just glory', 'end_index': 113, 'id': 7}, {'start_index': 117, 'text': 'every minute', 'end_index': 129, 'id': 8}, {'start_index': 133, 'text': 'your life', 'end_index': 142, 'id': 9}, {'start_index': 161, 'text': 'he', 'end_index': 163, 'id': 10}, {'start_index': 168, 'text': 'adventures', 'end_index': 178, 'id': 11}, {'start_index': 180, 'text': 'loves', 'end_index': 185, 'id': 12}, {'start_index': 187, 'text': 'trials', 'end_index': 193, 'id': 13}, {'start_index': 198, 'text': 'triumphs', 'end_index': 206, 'id': 14}, {'start_index': 210, 'text': 'his life', 'end_index': 218, 'id': 15}, {'start_index': 222, 'text': 'you', 'end_index': 225, 'id': 16}, {'start_index': 232, 'text': 'yours', 'end_index': 237, 'id': 17}, {'start_index': 256, 'text': 'your thoughts', 'end_index': 269, 'id': 18}, {'start_index': 273, 'text': 'the good times', 'end_index': 287, 'id': 19}, {'start_index': 293, 'text': 'you', 'end_index': 296, 'id': 20}, {'start_index': 308, 'text': 'him', 'end_index': 311, 'id': 21}, {'start_index': 323, 'text': "his 'spirit", 'end_index': 334, 'id': 22}, {'start_index': 352, 'text': 'your thoughts', 'end_index': 365, 'id': 23}];
+	var coref = [{'id': 0, 'members': [0]}, {'id': 1, 'members': [1]}, {'id': 2, 'members': [16, 2, 3, 20]}, {'id': 3, 'members': [4]}, {'id': 4, 'members': [10, 5, 21]}, {'id': 5, 'members': [6]}, {'id': 6, 'members': [7]}, {'id': 7, 'members': [8]}, {'id': 8, 'members': [9, 17]}, {'id': 9, 'members': [11]}, {'id': 10, 'members': [12]}, {'id': 11, 'members': [13]}, {'id': 12, 'members': [14]}, {'id': 13, 'members': [15]}, {'id': 14, 'members': [18, 23]}, {'id': 15, 'members': [19]}, {'id': 16, 'members': [22]}];
+	var bridges = [];
+	var current_np_id = 0;
+	var url = 'N/A';
+	</script>
+	<script src='ood_ids.js'></script>
+	<script src='bridging_exploration.js'></script>
+	<script src="https://cdn.jsdelivr.net/npm/ractive"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
+</head>
+
+<body>
+<div id="page">
+	<script src='data_init.js'></script>
+</div>	
+</body>
+
+
+</html>

@@ -1,0 +1,35 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>BridgingExplorationTool</title>
+	<link rel="stylesheet" href="styles.css">
+	<script type="text/javascript">
+	var COLORS = ["#8cffd8", "#FF7F50", "#6495ED", "#BDB76B", "#DDA0DD", "#FF69B4", "#FFD700", "#F5DEB3"];
+	var PREPS = ['of', 'in', 'to', 'for', 'with', 'on', 'at', 'from', 'by', 'about', 'over', 'between', 'against', 'under', 'among', 'before', 'after'];
+	var IDX = 340;
+	var HIT_ID = 60285;
+	var BRIDGING_RESULTS_UNFOLDED = [{'bridge': 1, 'complement': 0, 'preposition': 'for', 'coref_cluster': 0}, {'bridge': 1, 'complement': 2, 'preposition': 'for', 'coref_cluster': 0}, {'bridge': 1, 'complement': 3, 'preposition': 'for', 'coref_cluster': 0}, {'bridge': 1, 'complement': 11, 'preposition': 'for', 'coref_cluster': 0}, {'bridge': 1, 'complement': 13, 'preposition': 'for', 'coref_cluster': 0}, {'bridge': 1, 'complement': 16, 'preposition': 'for', 'coref_cluster': 0}, {'bridge': 2, 'complement': 17, 'preposition': 'of', 'coref_cluster': 9}, {'bridge': 9, 'complement': 5, 'preposition': 'of', 'coref_cluster': 3}];
+	var CURR_SPLIT_HIT_IDS = []
+	var BRIDGING_RESULTS = [];
+	var text = {'raw_text': 'I\'m on a loss Author: chrisora13 psychforge: "I have been living as a ghost since the 90\'s.  Or atleast half undead. Some part of me never came to life, or died.  "  SabineMaxine: "You\'re not alone, there\'s many of us here who have felt or are going through the same. You don\'t know me but I\'m here if you wanna talk." ', 'title': {'start_index': 0, 'end_index': 13}, 'subtitles': [{'start_index': 14, 'end_index': 32, 'id': 0}], 'paragraphs': [{'start_index': 33, 'end_index': 165, 'id': 0}, {'start_index': 166, 'end_index': 319, 'id': 1}], 'indents': [0, 0], 'paragraph_authors': ['psychforge', 'SabineMaxine']};
+	var nps = [{'start_index': 0, 'text': 'I', 'end_index': 1, 'id': 0}, {'start_index': 7, 'text': 'a loss', 'end_index': 13, 'id': 1}, {'start_index': 14, 'text': 'Author', 'end_index': 20, 'id': 2}, {'start_index': 22, 'text': 'chrisora13', 'end_index': 32, 'id': 3}, {'start_index': 46, 'text': 'I', 'end_index': 47, 'id': 4}, {'start_index': 68, 'text': 'a ghost', 'end_index': 75, 'id': 5}, {'start_index': 93, 'text': 'Or atleast half undead', 'end_index': 115, 'id': 6}, {'start_index': 117, 'text': 'Some part', 'end_index': 126, 'id': 7}, {'start_index': 130, 'text': 'me', 'end_index': 132, 'id': 8}, {'start_index': 147, 'text': 'life', 'end_index': 151, 'id': 9}, {'start_index': 166, 'text': 'SabineMaxine', 'end_index': 178, 'id': 10}, {'start_index': 181, 'text': 'You', 'end_index': 184, 'id': 11}, {'start_index': 215, 'text': 'us', 'end_index': 217, 'id': 12}, {'start_index': 268, 'text': 'You', 'end_index': 271, 'id': 13}, {'start_index': 283, 'text': 'me', 'end_index': 285, 'id': 14}, {'start_index': 290, 'text': 'I', 'end_index': 291, 'id': 15}, {'start_index': 302, 'text': 'you', 'end_index': 305, 'id': 16}, {'end_index': 13, 'start_index': 0, 'text': "I'm on a loss", 'id': 17}];
+	var coref = [{'id': 0, 'members': [0, 2, 3, 11, 13, 16]}, {'id': 1, 'members': [1]}, {'id': 2, 'members': [8, 4]}, {'id': 3, 'members': [5]}, {'id': 4, 'members': [6]}, {'id': 5, 'members': [7]}, {'id': 6, 'members': [9]}, {'id': 7, 'members': [10, 14, 15]}, {'id': 8, 'members': [12]}, {'id': 9, 'members': [17]}];
+	var bridges = [];
+	var current_np_id = 0;
+	var url = 'N/A';
+	</script>
+	<script src='ood_ids.js'></script>
+	<script src='bridging_exploration.js'></script>
+	<script src="https://cdn.jsdelivr.net/npm/ractive"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
+</head>
+
+<body>
+<div id="page">
+	<script src='data_init.js'></script>
+</div>	
+</body>
+
+
+</html>

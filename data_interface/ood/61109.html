@@ -1,0 +1,35 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>BridgingExplorationTool</title>
+	<link rel="stylesheet" href="styles.css">
+	<script type="text/javascript">
+	var COLORS = ["#8cffd8", "#FF7F50", "#6495ED", "#BDB76B", "#DDA0DD", "#FF69B4", "#FFD700", "#F5DEB3"];
+	var PREPS = ['of', 'in', 'to', 'for', 'with', 'on', 'at', 'from', 'by', 'about', 'over', 'between', 'against', 'under', 'among', 'before', 'after'];
+	var IDX = 497;
+	var HIT_ID = 61109;
+	var BRIDGING_RESULTS_UNFOLDED = [{'bridge': 0, 'complement': 2, 'preposition': 'about', 'coref_cluster': 2}, {'bridge': 0, 'complement': 1, 'preposition': 'from', 'coref_cluster': 1}, {'bridge': 7, 'complement': 13, 'preposition': 'about', 'coref_cluster': 10}, {'bridge': 7, 'complement': 12, 'preposition': 'about', 'coref_cluster': 9}, {'bridge': 7, 'complement': 10, 'preposition': 'about', 'coref_cluster': 8}, {'bridge': 7, 'complement': 11, 'preposition': 'about', 'coref_cluster': 8}, {'bridge': 7, 'complement': 9, 'preposition': 'by', 'coref_cluster': 7}, {'bridge': 7, 'complement': 8, 'preposition': 'by', 'coref_cluster': 6}, {'bridge': 7, 'complement': 2, 'preposition': 'about', 'coref_cluster': 2}, {'bridge': 7, 'complement': 1, 'preposition': 'about', 'coref_cluster': 1}, {'bridge': 10, 'complement': 13, 'preposition': 'from', 'coref_cluster': 10}, {'bridge': 10, 'complement': 1, 'preposition': 'member(s) of', 'coref_cluster': 1}, {'bridge': 1, 'complement': 2, 'preposition': 'of', 'coref_cluster': 2}, {'bridge': 11, 'complement': 13, 'preposition': 'from', 'coref_cluster': 10}, {'bridge': 11, 'complement': 12, 'preposition': 'in', 'coref_cluster': 9}, {'bridge': 11, 'complement': 2, 'preposition': 'of', 'coref_cluster': 2}, {'bridge': 11, 'complement': 1, 'preposition': 'member(s) of', 'coref_cluster': 1}, {'bridge': 12, 'complement': 13, 'preposition': 'of', 'coref_cluster': 10}, {'bridge': 12, 'complement': 10, 'preposition': 'by', 'coref_cluster': 8}, {'bridge': 12, 'complement': 11, 'preposition': 'by', 'coref_cluster': 8}, {'bridge': 12, 'complement': 2, 'preposition': 'by', 'coref_cluster': 2}, {'bridge': 14, 'complement': 10, 'preposition': 'member(s) of', 'coref_cluster': 8}, {'bridge': 14, 'complement': 11, 'preposition': 'member(s) of', 'coref_cluster': 8}, {'bridge': 14, 'complement': 1, 'preposition': 'member(s) of', 'coref_cluster': 1}, {'bridge': 15, 'complement': 10, 'preposition': 'member(s) of', 'coref_cluster': 8}, {'bridge': 15, 'complement': 11, 'preposition': 'member(s) of', 'coref_cluster': 8}, {'bridge': 15, 'complement': 1, 'preposition': 'member(s) of', 'coref_cluster': 1}, {'bridge': 16, 'complement': 10, 'preposition': 'member(s) of', 'coref_cluster': 8}, {'bridge': 16, 'complement': 11, 'preposition': 'member(s) of', 'coref_cluster': 8}, {'bridge': 16, 'complement': 1, 'preposition': 'member(s) of', 'coref_cluster': 1}, {'bridge': 21, 'complement': 24, 'preposition': 'member(s) of', 'coref_cluster': 18}];
+	var CURR_SPLIT_HIT_IDS = []
+	var BRIDGING_RESULTS = [];
+	var text = {'raw_text': 'Any story from the native side of the Spanish conquistadors? Author: UHurricanes15 Mictlantecuhtli: "I recommend checking out the following book,  * Laura E. Matthew, and Michel R. Oudijk, eds. Indian conquistadors: Indigenous allies in the conquest of Mesoamerica. University of Oklahoma Press, 2007"  Librehombre: "read about Malinche, Cortez\'s girl friend and translator. To some a villian and to others a heroine."  silverappleyard: "You might be interested in the first two books under **Conquest and New Spain** on [the booklist](https://www.reddit.com/r/AskHistorians/wiki/books/americas/latinamerica#wiki_conquest_and_new_spain)." ', 'title': {'start_index': 0, 'end_index': 60}, 'subtitles': [{'start_index': 61, 'end_index': 82, 'id': 0}], 'paragraphs': [{'start_index': 83, 'end_index': 302, 'id': 0}, {'start_index': 303, 'end_index': 419, 'id': 1}, {'start_index': 420, 'end_index': 639, 'id': 2}], 'indents': [0, 0, 0], 'paragraph_authors': ['Mictlantecuhtli', 'Librehombre', 'silverappleyard']};
+	var nps = [{'start_index': 0, 'text': 'Any story', 'end_index': 9, 'id': 0}, {'start_index': 15, 'text': 'the native side', 'end_index': 30, 'id': 1}, {'start_index': 34, 'text': 'the Spanish conquistadors', 'end_index': 59, 'id': 2}, {'start_index': 61, 'text': 'Author', 'end_index': 67, 'id': 3}, {'start_index': 69, 'text': 'UHurricanes15', 'end_index': 82, 'id': 4}, {'start_index': 83, 'text': 'Mictlantecuhtli', 'end_index': 98, 'id': 5}, {'start_index': 101, 'text': 'I', 'end_index': 102, 'id': 6}, {'start_index': 126, 'text': 'the following book', 'end_index': 144, 'id': 7}, {'start_index': 149, 'text': 'Laura E. Matthew', 'end_index': 165, 'id': 8}, {'start_index': 171, 'text': 'Michel R. Oudijk', 'end_index': 187, 'id': 9}, {'start_index': 194, 'text': 'Indian conquistadors', 'end_index': 214, 'id': 10}, {'start_index': 216, 'text': 'Indigenous allies', 'end_index': 233, 'id': 11}, {'start_index': 237, 'text': 'the conquest', 'end_index': 249, 'id': 12}, {'start_index': 253, 'text': 'Mesoamerica', 'end_index': 264, 'id': 13}, {'start_index': 328, 'text': 'Malinche', 'end_index': 336, 'id': 14}, {'start_index': 338, 'text': "Cortez's girl friend", 'end_index': 358, 'id': 15}, {'start_index': 363, 'text': 'translator', 'end_index': 373, 'id': 16}, {'start_index': 378, 'text': 'some a villian', 'end_index': 392, 'id': 17}, {'start_index': 400, 'text': 'others', 'end_index': 406, 'id': 18}, {'start_index': 420, 'text': 'silverappleyard', 'end_index': 435, 'id': 19}, {'start_index': 438, 'text': 'You', 'end_index': 441, 'id': 20}, {'start_index': 465, 'text': 'the first two books', 'end_index': 484, 'id': 21}, {'start_index': 492, 'text': '*Conquest', 'end_index': 501, 'id': 22}, {'start_index': 506, 'text': 'New Spain', 'end_index': 515, 'id': 23}, {'end_index': 534, 'start_index': 522, 'text': 'the booklist', 'id': 24}];
+	var coref = [{'id': 0, 'members': [0]}, {'id': 1, 'members': [1]}, {'id': 2, 'members': [2]}, {'id': 3, 'members': [3, 4, 20]}, {'id': 4, 'members': [5, 6]}, {'id': 5, 'members': [7]}, {'id': 6, 'members': [8]}, {'id': 7, 'members': [9]}, {'id': 8, 'members': [10, 11]}, {'id': 9, 'members': [12]}, {'id': 10, 'members': [13]}, {'id': 11, 'members': [16, 14, 15]}, {'id': 12, 'members': [17]}, {'id': 13, 'members': [18]}, {'id': 14, 'members': [19]}, {'id': 15, 'members': [21]}, {'id': 16, 'members': [22]}, {'id': 17, 'members': [23]}, {'id': 18, 'members': [24]}];
+	var bridges = [];
+	var current_np_id = 0;
+	var url = 'N/A';
+	</script>
+	<script src='ood_ids.js'></script>
+	<script src='bridging_exploration.js'></script>
+	<script src="https://cdn.jsdelivr.net/npm/ractive"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
+</head>
+
+<body>
+<div id="page">
+	<script src='data_init.js'></script>
+</div>	
+</body>
+
+
+</html>

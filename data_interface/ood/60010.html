@@ -1,0 +1,35 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>BridgingExplorationTool</title>
+	<link rel="stylesheet" href="styles.css">
+	<script type="text/javascript">
+	var COLORS = ["#8cffd8", "#FF7F50", "#6495ED", "#BDB76B", "#DDA0DD", "#FF69B4", "#FFD700", "#F5DEB3"];
+	var PREPS = ['of', 'in', 'to', 'for', 'with', 'on', 'at', 'from', 'by', 'about', 'over', 'between', 'against', 'under', 'among', 'before', 'after'];
+	var IDX = 378;
+	var HIT_ID = 60010;
+	var BRIDGING_RESULTS_UNFOLDED = [{'bridge': 0, 'complement': 13, 'preposition': 'in', 'coref_cluster': 11}, {'bridge': 0, 'complement': 2, 'preposition': 'in', 'coref_cluster': 2}, {'bridge': 3, 'complement': 2, 'preposition': 'of', 'coref_cluster': 2}, {'bridge': 3, 'complement': 0, 'preposition': 'from', 'coref_cluster': 0}, {'bridge': 7, 'complement': 13, 'preposition': 'about', 'coref_cluster': 11}, {'bridge': 7, 'complement': 11, 'preposition': 'about', 'coref_cluster': 9}, {'bridge': 7, 'complement': 3, 'preposition': 'about', 'coref_cluster': 3}, {'bridge': 7, 'complement': 2, 'preposition': 'about', 'coref_cluster': 2}, {'bridge': 7, 'complement': 0, 'preposition': 'about', 'coref_cluster': 0}, {'bridge': 8, 'complement': 7, 'preposition': 'about', 'coref_cluster': 6}, {'bridge': 8, 'complement': 7, 'preposition': 'for', 'coref_cluster': 6}, {'bridge': 8, 'complement': 3, 'preposition': 'about', 'coref_cluster': 3}, {'bridge': 8, 'complement': 2, 'preposition': 'about', 'coref_cluster': 2}, {'bridge': 8, 'complement': 0, 'preposition': 'about', 'coref_cluster': 0}, {'bridge': 8, 'complement': 0, 'preposition': 'for', 'coref_cluster': 0}, {'bridge': 9, 'complement': 7, 'preposition': 'about', 'coref_cluster': 6}, {'bridge': 9, 'complement': 2, 'preposition': 'about', 'coref_cluster': 2}, {'bridge': 9, 'complement': 3, 'preposition': 'about', 'coref_cluster': 3}, {'bridge': 9, 'complement': 0, 'preposition': 'about', 'coref_cluster': 0}, {'bridge': 12, 'complement': 13, 'preposition': 'of', 'coref_cluster': 11}, {'bridge': 12, 'complement': 3, 'preposition': 'for', 'coref_cluster': 3}, {'bridge': 12, 'complement': 2, 'preposition': 'for', 'coref_cluster': 2}, {'bridge': 13, 'complement': 3, 'preposition': 'for', 'coref_cluster': 3}];
+	var CURR_SPLIT_HIT_IDS = []
+	var BRIDGING_RESULTS = [];
+	var text = {'raw_text': 'Inspite of scientific advances, why haven\'t we developed spacecrafts that would be able to reach light speeds? Author: vandalsavagecabbage albasri: "Such questions are better suited for our newish sistersub /r/asksciencediscussion. Please post there instead."  Rannasha: "Because reaching light speed would require an infinite amount of energy. And as it turns out, we don\'t have that at hand."  vandalsavagecabbage: "Would you like to expand this? Is there anything else to say too?" ', 'title': {'start_index': 0, 'end_index': 110}, 'subtitles': [{'start_index': 111, 'end_index': 138, 'id': 0}], 'paragraphs': [{'start_index': 139, 'end_index': 260, 'id': 0}, {'start_index': 261, 'end_index': 395, 'id': 1}, {'start_index': 396, 'end_index': 485, 'id': 2}], 'indents': [0, 0, 1], 'paragraph_authors': ['albasri', 'Rannasha', 'vandalsavagecabbage']};
+	var nps = [{'start_index': 11, 'text': 'scientific advances', 'end_index': 30, 'id': 0}, {'start_index': 44, 'text': 'we', 'end_index': 46, 'id': 1}, {'start_index': 57, 'text': 'spacecrafts', 'end_index': 68, 'id': 2}, {'start_index': 97, 'text': 'light speeds', 'end_index': 109, 'id': 3}, {'start_index': 111, 'text': 'Author', 'end_index': 117, 'id': 4}, {'start_index': 119, 'text': 'vandalsavagecabbage', 'end_index': 138, 'id': 5}, {'start_index': 139, 'text': 'albasri', 'end_index': 146, 'id': 6}, {'start_index': 149, 'text': 'Such questions', 'end_index': 163, 'id': 7}, {'start_index': 186, 'text': 'our newish sistersub', 'end_index': 206, 'id': 8}, {'start_index': 207, 'text': '/r/asksciencediscussion', 'end_index': 230, 'id': 9}, {'start_index': 261, 'text': 'Rannasha', 'end_index': 269, 'id': 10}, {'start_index': 280, 'text': 'reaching light speed', 'end_index': 300, 'id': 11}, {'start_index': 315, 'text': 'an infinite amount', 'end_index': 333, 'id': 12}, {'start_index': 337, 'text': 'energy', 'end_index': 343, 'id': 13}, {'start_index': 366, 'text': 'we', 'end_index': 368, 'id': 14}, {'start_index': 388, 'text': 'hand', 'end_index': 392, 'id': 15}, {'start_index': 396, 'text': 'vandalsavagecabbage', 'end_index': 415, 'id': 16}, {'start_index': 424, 'text': 'you', 'end_index': 427, 'id': 17}, {'start_index': 458, 'text': 'anything', 'end_index': 466, 'id': 18}];
+	var coref = [{'id': 0, 'members': [0]}, {'id': 1, 'members': [1, 14]}, {'id': 2, 'members': [2]}, {'id': 3, 'members': [3]}, {'id': 4, 'members': [16, 4, 5]}, {'id': 5, 'members': [6]}, {'id': 6, 'members': [7]}, {'id': 7, 'members': [8, 9]}, {'id': 8, 'members': [17, 10]}, {'id': 9, 'members': [11]}, {'id': 10, 'members': [12]}, {'id': 11, 'members': [13]}, {'id': 12, 'members': [15]}, {'id': 13, 'members': [18]}];
+	var bridges = [];
+	var current_np_id = 0;
+	var url = 'N/A';
+	</script>
+	<script src='ood_ids.js'></script>
+	<script src='bridging_exploration.js'></script>
+	<script src="https://cdn.jsdelivr.net/npm/ractive"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
+</head>
+
+<body>
+<div id="page">
+	<script src='data_init.js'></script>
+</div>	
+</body>
+
+
+</html>

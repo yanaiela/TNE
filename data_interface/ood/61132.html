@@ -1,0 +1,35 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>BridgingExplorationTool</title>
+	<link rel="stylesheet" href="styles.css">
+	<script type="text/javascript">
+	var COLORS = ["#8cffd8", "#FF7F50", "#6495ED", "#BDB76B", "#DDA0DD", "#FF69B4", "#FFD700", "#F5DEB3"];
+	var PREPS = ['of', 'in', 'to', 'for', 'with', 'on', 'at', 'from', 'by', 'about', 'over', 'between', 'against', 'under', 'among', 'before', 'after'];
+	var IDX = 409;
+	var HIT_ID = 61132;
+	var BRIDGING_RESULTS_UNFOLDED = [{'bridge': 4, 'complement': 0, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 4, 'complement': 1, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 4, 'complement': 24, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 5, 'complement': 6, 'preposition': 'on', 'coref_cluster': 5}, {'bridge': 5, 'complement': 0, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 5, 'complement': 1, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 5, 'complement': 24, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 7, 'complement': 0, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 7, 'complement': 1, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 7, 'complement': 24, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 9, 'complement': 0, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 9, 'complement': 1, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 9, 'complement': 24, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 10, 'complement': 0, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 10, 'complement': 1, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 10, 'complement': 24, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 12, 'complement': 0, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 12, 'complement': 1, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 12, 'complement': 24, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 13, 'complement': 0, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 13, 'complement': 1, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 13, 'complement': 24, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 14, 'complement': 0, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 14, 'complement': 1, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 14, 'complement': 24, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 18, 'complement': 21, 'preposition': 'about', 'coref_cluster': 18}, {'bridge': 18, 'complement': 19, 'preposition': 'about', 'coref_cluster': 16}, {'bridge': 18, 'complement': 16, 'preposition': 'to', 'coref_cluster': 13}, {'bridge': 18, 'complement': 15, 'preposition': 'to', 'coref_cluster': 13}, {'bridge': 20, 'complement': 19, 'preposition': 'of', 'coref_cluster': 16}, {'bridge': 25, 'complement': 0, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 25, 'complement': 1, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 25, 'complement': 24, 'preposition': 'of', 'coref_cluster': 0}];
+	var CURR_SPLIT_HIT_IDS = []
+	var BRIDGING_RESULTS = [];
+	var text = {'raw_text': 'Napoleon\'s only son (Napoleon II) survived him, but died in Austria at the age of 21, too soon to leave his mark on history. However, 21 is old enough to have a mind of his own: do we know about his political thoughts and ambitions? What was going on in his mind about his own position and future? Author: Oppidano EnclavedMicrostate: "As a follow-up, what about Napoleon IV, who was also killed at an only moderately young age (23) in the Zulu War?"  Tonyracs: "Did Napoleons son have any kids?" ', 'title': {'start_index': 0, 'end_index': 297}, 'subtitles': [{'start_index': 298, 'end_index': 314, 'id': 0}], 'paragraphs': [{'start_index': 315, 'end_index': 451, 'id': 0}, {'start_index': 452, 'end_index': 497, 'id': 1}], 'indents': [0, 0], 'paragraph_authors': ['EnclavedMicrostate', 'Tonyracs']};
+	var nps = [{'start_index': 0, 'text': "Napoleon's only son", 'end_index': 19, 'id': 0}, {'start_index': 21, 'text': 'Napoleon II', 'end_index': 32, 'id': 1}, {'start_index': 43, 'text': 'him', 'end_index': 46, 'id': 2}, {'start_index': 60, 'text': 'Austria', 'end_index': 67, 'id': 3}, {'start_index': 71, 'text': 'the age of 21', 'end_index': 84, 'id': 4}, {'start_index': 104, 'text': 'his mark', 'end_index': 112, 'id': 5}, {'start_index': 116, 'text': 'history', 'end_index': 123, 'id': 6}, {'start_index': 159, 'text': 'a mind', 'end_index': 165, 'id': 7}, {'start_index': 181, 'text': 'we', 'end_index': 183, 'id': 8}, {'start_index': 195, 'text': 'his political thoughts', 'end_index': 217, 'id': 9}, {'start_index': 222, 'text': 'ambitions', 'end_index': 231, 'id': 10}, {'start_index': 233, 'text': 'What', 'end_index': 237, 'id': 11}, {'start_index': 254, 'text': 'his mind', 'end_index': 262, 'id': 12}, {'start_index': 269, 'text': 'his own position', 'end_index': 285, 'id': 13}, {'start_index': 290, 'text': 'future', 'end_index': 296, 'id': 14}, {'start_index': 298, 'text': 'Author', 'end_index': 304, 'id': 15}, {'start_index': 306, 'text': 'Oppidano', 'end_index': 314, 'id': 16}, {'start_index': 315, 'text': 'EnclavedMicrostate', 'end_index': 333, 'id': 17}, {'start_index': 339, 'text': 'a follow-up', 'end_index': 350, 'id': 18}, {'start_index': 363, 'text': 'Napoleon IV', 'end_index': 374, 'id': 19}, {'start_index': 399, 'text': 'an only moderately young age', 'end_index': 427, 'id': 20}, {'start_index': 436, 'text': 'the Zulu War', 'end_index': 448, 'id': 21}, {'start_index': 452, 'text': 'Tonyracs', 'end_index': 460, 'id': 22}, {'start_index': 467, 'text': 'Napoleons', 'end_index': 476, 'id': 23}, {'start_index': 477, 'text': 'son', 'end_index': 480, 'id': 24}, {'start_index': 486, 'text': 'any kids', 'end_index': 494, 'id': 25}];
+	var coref = [{'id': 0, 'members': [0, 1, 24]}, {'id': 1, 'members': [2, 23]}, {'id': 2, 'members': [3]}, {'id': 3, 'members': [4]}, {'id': 4, 'members': [5]}, {'id': 5, 'members': [6]}, {'id': 6, 'members': [7, 12]}, {'id': 7, 'members': [8]}, {'id': 8, 'members': [9]}, {'id': 9, 'members': [10]}, {'id': 10, 'members': [11]}, {'id': 11, 'members': [13]}, {'id': 12, 'members': [14]}, {'id': 13, 'members': [16, 15]}, {'id': 14, 'members': [17]}, {'id': 15, 'members': [18]}, {'id': 16, 'members': [19]}, {'id': 17, 'members': [20]}, {'id': 18, 'members': [21]}, {'id': 19, 'members': [22]}, {'id': 20, 'members': [25]}];
+	var bridges = [];
+	var current_np_id = 0;
+	var url = 'N/A';
+	</script>
+	<script src='ood_ids.js'></script>
+	<script src='bridging_exploration.js'></script>
+	<script src="https://cdn.jsdelivr.net/npm/ractive"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
+</head>
+
+<body>
+<div id="page">
+	<script src='data_init.js'></script>
+</div>	
+</body>
+
+
+</html>

@@ -1,0 +1,35 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>BridgingExplorationTool</title>
+	<link rel="stylesheet" href="styles.css">
+	<script type="text/javascript">
+	var COLORS = ["#8cffd8", "#FF7F50", "#6495ED", "#BDB76B", "#DDA0DD", "#FF69B4", "#FFD700", "#F5DEB3"];
+	var PREPS = ['of', 'in', 'to', 'for', 'with', 'on', 'at', 'from', 'by', 'about', 'over', 'between', 'against', 'under', 'among', 'before', 'after'];
+	var IDX = 364;
+	var HIT_ID = 60306;
+	var BRIDGING_RESULTS_UNFOLDED = [{'bridge': 0, 'complement': 16, 'preposition': 'of', 'coref_cluster': 11}, {'bridge': 2, 'complement': 3, 'preposition': 'to', 'coref_cluster': 3}, {'bridge': 2, 'complement': 11, 'preposition': 'to', 'coref_cluster': 3}, {'bridge': 2, 'complement': 3, 'preposition': 'of', 'coref_cluster': 3}, {'bridge': 2, 'complement': 11, 'preposition': 'of', 'coref_cluster': 3}, {'bridge': 5, 'complement': 0, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 5, 'complement': 8, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 5, 'complement': 4, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 5, 'complement': 6, 'preposition': 'of', 'coref_cluster': 0}, {'bridge': 5, 'complement': 17, 'preposition': 'of', 'coref_cluster': 12}, {'bridge': 12, 'complement': 13, 'preposition': 'into', 'coref_cluster': 9}, {'bridge': 12, 'complement': 3, 'preposition': 'of', 'coref_cluster': 3}, {'bridge': 12, 'complement': 11, 'preposition': 'of', 'coref_cluster': 3}, {'bridge': 15, 'complement': 13, 'preposition': 'in', 'coref_cluster': 9}, {'bridge': 15, 'complement': 10, 'preposition': 'for', 'coref_cluster': 7}, {'bridge': 15, 'complement': 14, 'preposition': 'for', 'coref_cluster': 7}, {'bridge': 15, 'complement': 10, 'preposition': 'to', 'coref_cluster': 7}, {'bridge': 15, 'complement': 14, 'preposition': 'to', 'coref_cluster': 7}, {'bridge': 15, 'complement': 3, 'preposition': 'of', 'coref_cluster': 3}, {'bridge': 15, 'complement': 11, 'preposition': 'of', 'coref_cluster': 3}, {'bridge': 15, 'complement': 18, 'preposition': 'during', 'coref_cluster': 13}];
+	var CURR_SPLIT_HIT_IDS = []
+	var BRIDGING_RESULTS = [];
+	var text = {'raw_text': 'Zoloft experiences? Author: 1234whosatthedooridk Powderbones: "Any downsides to zoloft?"  1234whosatthedooridk: "I\'ve been having random moments of non stop crying. Idk.if I\'m adjusting or what "  dsjolin900: "Just wait. You need to give it at least three weeks."  psychforge: "Zoloft takes a few weeks minimum to work its way into the system.  Almost 5 years later and I am still enjoying its benefits." ', 'title': {'start_index': 0, 'end_index': 19}, 'subtitles': [{'start_index': 20, 'end_index': 48, 'id': 0}], 'paragraphs': [{'start_index': 49, 'end_index': 89, 'id': 0}, {'start_index': 90, 'end_index': 196, 'id': 1}, {'start_index': 197, 'end_index': 264, 'id': 2}, {'start_index': 265, 'end_index': 405, 'id': 3}], 'indents': [0, 1, 0, 0], 'paragraph_authors': ['Powderbones', '1234whosatthedooridk', 'dsjolin900', 'psychforge']};
+	var nps = [{'start_index': 20, 'text': 'Author', 'end_index': 26, 'id': 0}, {'start_index': 49, 'text': 'Powderbones', 'end_index': 60, 'id': 1}, {'start_index': 63, 'text': 'Any downsides', 'end_index': 76, 'id': 2}, {'start_index': 80, 'text': 'zoloft', 'end_index': 86, 'id': 3}, {'start_index': 113, 'text': 'I', 'end_index': 114, 'id': 4}, {'start_index': 130, 'text': 'random moments', 'end_index': 144, 'id': 5}, {'start_index': 172, 'text': 'I', 'end_index': 173, 'id': 6}, {'start_index': 189, 'text': 'what', 'end_index': 193, 'id': 7}, {'start_index': 221, 'text': 'You', 'end_index': 224, 'id': 8}, {'start_index': 241, 'text': 'at least three weeks', 'end_index': 261, 'id': 9}, {'start_index': 265, 'text': 'psychforge', 'end_index': 275, 'id': 10}, {'start_index': 278, 'text': 'Zoloft', 'end_index': 284, 'id': 11}, {'start_index': 319, 'text': 'its way', 'end_index': 326, 'id': 12}, {'start_index': 332, 'text': 'the system', 'end_index': 342, 'id': 13}, {'start_index': 370, 'text': 'I', 'end_index': 371, 'id': 14}, {'start_index': 390, 'text': 'its benefits', 'end_index': 402, 'id': 15}, {'end_index': 19, 'start_index': 0, 'text': 'Zoloft experiences?', 'id': 16}, {'end_index': 163, 'start_index': 148, 'text': 'non stop crying', 'id': 17}, {'end_index': 359, 'start_index': 352, 'text': '5 years', 'id': 18}];
+	var coref = [{'id': 0, 'members': [0, 8, 4, 6]}, {'id': 1, 'members': [1]}, {'id': 2, 'members': [2]}, {'id': 3, 'members': [3, 11]}, {'id': 4, 'members': [5]}, {'id': 5, 'members': [7]}, {'id': 6, 'members': [9]}, {'id': 7, 'members': [10, 14]}, {'id': 8, 'members': [12]}, {'id': 9, 'members': [13]}, {'id': 10, 'members': [15]}, {'id': 11, 'members': [16]}, {'id': 12, 'members': [17]}, {'id': 13, 'members': [18]}];
+	var bridges = [];
+	var current_np_id = 0;
+	var url = 'N/A';
+	</script>
+	<script src='ood_ids.js'></script>
+	<script src='bridging_exploration.js'></script>
+	<script src="https://cdn.jsdelivr.net/npm/ractive"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
+</head>
+
+<body>
+<div id="page">
+	<script src='data_init.js'></script>
+</div>	
+</body>
+
+
+</html>

@@ -1,0 +1,35 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>BridgingExplorationTool</title>
+	<link rel="stylesheet" href="styles.css">
+	<script type="text/javascript">
+	var COLORS = ["#8cffd8", "#FF7F50", "#6495ED", "#BDB76B", "#DDA0DD", "#FF69B4", "#FFD700", "#F5DEB3"];
+	var PREPS = ['of', 'in', 'to', 'for', 'with', 'on', 'at', 'from', 'by', 'about', 'over', 'between', 'against', 'under', 'among', 'before', 'after'];
+	var IDX = 341;
+	var HIT_ID = 60286;
+	var BRIDGING_RESULTS_UNFOLDED = [{'bridge': 0, 'complement': 21, 'preposition': 'of', 'coref_cluster': 13}, {'bridge': 7, 'complement': 6, 'preposition': 'for', 'coref_cluster': 2}, {'bridge': 7, 'complement': 5, 'preposition': 'for', 'coref_cluster': 1}, {'bridge': 8, 'complement': 6, 'preposition': 'for', 'coref_cluster': 2}, {'bridge': 8, 'complement': 5, 'preposition': 'for', 'coref_cluster': 1}, {'bridge': 14, 'complement': 19, 'preposition': 'of', 'coref_cluster': 6}, {'bridge': 14, 'complement': 12, 'preposition': 'of', 'coref_cluster': 6}, {'bridge': 14, 'complement': 15, 'preposition': 'of', 'coref_cluster': 6}, {'bridge': 16, 'complement': 19, 'preposition': 'of', 'coref_cluster': 6}, {'bridge': 16, 'complement': 12, 'preposition': 'of', 'coref_cluster': 6}, {'bridge': 16, 'complement': 15, 'preposition': 'of', 'coref_cluster': 6}, {'bridge': 17, 'complement': 18, 'preposition': 'for', 'coref_cluster': 8}, {'bridge': 17, 'complement': 16, 'preposition': 'for', 'coref_cluster': 8}, {'bridge': 17, 'complement': 19, 'preposition': 'of', 'coref_cluster': 6}, {'bridge': 17, 'complement': 12, 'preposition': 'of', 'coref_cluster': 6}, {'bridge': 17, 'complement': 15, 'preposition': 'of', 'coref_cluster': 6}];
+	var CURR_SPLIT_HIT_IDS = []
+	var BRIDGING_RESULTS = [];
+	var text = {'raw_text': 'hi Author: dannyxluckyx xilvey: "be kind to yourself.  you\'re feeling better and that\'s great! forget the chores and commitments for now, there\'s always another time or day to do them. focus on you.  take care"  lostapple321: "Hey..I\'m wasting the winter break away as well. And soon it\'s back to school..I have things to do but don\'t have the energy to do them. I know how you feel, it sucks.." ', 'title': {'start_index': 0, 'end_index': 2}, 'subtitles': [{'start_index': 3, 'end_index': 23, 'id': 0}], 'paragraphs': [{'start_index': 24, 'end_index': 211, 'id': 0}, {'start_index': 212, 'end_index': 396, 'id': 1}], 'indents': [0, 0], 'paragraph_authors': ['xilvey', 'lostapple321']};
+	var nps = [{'start_index': 3, 'text': 'Author', 'end_index': 9, 'id': 0}, {'start_index': 11, 'text': 'dannyxluckyx', 'end_index': 23, 'id': 1}, {'end_index': 30, 'start_index': 24, 'text': 'xilvey', 'id': 2}, {'start_index': 44, 'text': 'yourself', 'end_index': 52, 'id': 3}, {'start_index': 55, 'text': 'you', 'end_index': 58, 'id': 4}, {'start_index': 102, 'text': 'the chores', 'end_index': 112, 'id': 5}, {'start_index': 117, 'text': 'commitments', 'end_index': 128, 'id': 6}, {'start_index': 153, 'text': 'another time', 'end_index': 165, 'id': 7}, {'start_index': 169, 'text': 'day', 'end_index': 172, 'id': 8}, {'start_index': 179, 'text': 'them', 'end_index': 183, 'id': 9}, {'start_index': 194, 'text': 'you', 'end_index': 197, 'id': 10}, {'start_index': 205, 'text': 'care', 'end_index': 209, 'id': 11}, {'start_index': 212, 'text': 'lostapple321', 'end_index': 224, 'id': 12}, {'start_index': 232, 'text': "I'm", 'end_index': 235, 'id': 13}, {'start_index': 297, 'text': 'school', 'end_index': 303, 'id': 14}, {'start_index': 305, 'text': 'I', 'end_index': 306, 'id': 15}, {'start_index': 312, 'text': 'things', 'end_index': 318, 'id': 16}, {'start_index': 340, 'text': 'the energy', 'end_index': 350, 'id': 17}, {'start_index': 357, 'text': 'them', 'end_index': 361, 'id': 18}, {'start_index': 363, 'text': 'I', 'end_index': 364, 'id': 19}, {'start_index': 374, 'text': 'you', 'end_index': 377, 'id': 20}, {'end_index': 2, 'start_index': 0, 'text': 'hi', 'id': 21}, {'end_index': 260, 'start_index': 248, 'text': 'winter break', 'id': 22}];
+	var coref = [{'id': 0, 'members': [0, 1, 3, 4, 10, 20]}, {'id': 1, 'members': [5]}, {'id': 2, 'members': [6]}, {'id': 3, 'members': [7]}, {'id': 4, 'members': [8]}, {'id': 5, 'members': [11]}, {'id': 6, 'members': [19, 12, 15]}, {'id': 7, 'members': [14]}, {'id': 8, 'members': [18, 16]}, {'id': 9, 'members': [17]}, {'id': 10, 'members': [9]}, {'id': 11, 'members': [13]}, {'id': 12, 'members': [2]}, {'id': 13, 'members': [21]}, {'id': 14, 'members': [22]}];
+	var bridges = [];
+	var current_np_id = 0;
+	var url = 'N/A';
+	</script>
+	<script src='ood_ids.js'></script>
+	<script src='bridging_exploration.js'></script>
+	<script src="https://cdn.jsdelivr.net/npm/ractive"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
+</head>
+
+<body>
+<div id="page">
+	<script src='data_init.js'></script>
+</div>	
+</body>
+
+
+</html>
