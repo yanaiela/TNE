@@ -14,10 +14,6 @@ from tne.modeling.models.tne_coupled import TNECoupledModel
 from tne.modeling.dataset_readers.tne_reader import TNEReader
 from tne.modeling.predictors.tne_predictor import TNEPredictor
 
-app = Flask(__name__)
-CORS(app)
-nlp = spacy.load("en_core_web_sm", exclude=['ner'])
-
 
 class TNE(object):
     """
@@ -44,8 +40,6 @@ class TNE(object):
         out = self.nte_predictor.predict_json(input_json)
         return out
 
-
-tne_model = TNE()
 
 
 def add_annotation(text):
@@ -79,19 +73,41 @@ def add_annotation(text):
     return html
 
 
-@app.route('/tne/', methods=['POST'])
-@cross_origin()
-def serve():
-    text = request.form.get('text')
+def create_app():
+    global nlp
+    nlp = spacy.load("en_core_web_sm", exclude=['ner'])
+    global tne_model
+    tne_model = TNE()
 
-    if text.strip() == '' or text is None:
-        return ''
+    app = Flask(__name__)
+    CORS(app)
 
-    try:
-        html = add_annotation(text)
+    return app
 
-    except Exception as e:
-        print(e)
-        html = 'some error occurred while trying to find the TNE'
 
-    return html
+def create_router(app):
+    @app.route('/tne/', methods=['POST'])
+    @cross_origin()
+    def serve():
+        text = request.form.get('text')
+
+        if text.strip() == '' or text is None:
+            return ''
+
+        try:
+            html = add_annotation(text)
+
+        except Exception as e:
+            print(e)
+            html = 'some error occurred while trying to find the TNE'
+
+        return html
+    return serve
+
+
+if __name__ == '__main__':
+    app = create_app()
+    create_router(app)
+
+    app.run(host='0.0.0.0', port=5012)
+
