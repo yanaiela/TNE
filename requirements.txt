@@ -1,3 +1,6 @@
-allennlp
+torch==1.8.1
+transformers==4.4.2
+allennlp==2.6.0
 allennlp-models
 wandb
+Flask

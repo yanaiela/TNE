@@ -67,6 +67,17 @@ dictionary contains:
   * `url`: the url where the document was taken from (not always existing)
   * `source`: the original file name where the document was taken from
 
+
+## Getting Started
+
+Install dependencies
+```shell
+conda create -n tne python==3.7 anaconda
+conda activate tne
+
+pip install -r requirements.txt
+```
+
 ## Models
 
 We train the models using [allennlp](https://allennlp.org/)
