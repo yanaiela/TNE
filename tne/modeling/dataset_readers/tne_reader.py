@@ -83,7 +83,7 @@ class TNEReader(DatasetReader):
             text = doc['text']
             tokens = doc['tokens']
             tokenized_entities = doc['nps']
-            links = doc['np_relations']
+            links = doc.get('np_relations', None)
 
             yield self.text_to_instance(text, tokens, tokenized_entities, links)
 

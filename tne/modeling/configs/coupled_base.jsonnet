@@ -37,9 +37,9 @@ local num_labels = std.length(preposition_list);
     },
     "prepositions": preposition_list,
   },
-  "train_data_path": 'data/processed/train.jsonl',
-  "validation_data_path": 'data/processed/dev.jsonl',
-  "test_data_path": 'data/processed/test.jsonl',
+  "train_data_path": 'data/train.jsonl',
+  "validation_data_path": 'data/dev.jsonl',
+  "test_data_path": 'data/test_unlabeled.jsonl',
   "evaluate_on_test": false,
   "model": {
     "type": "tne_coupled_model",

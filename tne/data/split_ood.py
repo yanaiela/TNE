@@ -3,14 +3,19 @@ import json
 
 from tqdm import tqdm
 
-from tne.data.process_raw_data import to_file
-
 
 def read_data(in_f):
     with open(in_f, 'r') as f:
         data = f.readlines()
     data = [json.loads(x) for x in data]
     return data
+
+
+def to_file(documents, out_f):
+    with open(out_f, 'w') as f:
+        for doc in documents:
+            json.dump(doc, f)
+            f.write('\n')
 
 
 def main():

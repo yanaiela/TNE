@@ -2,7 +2,7 @@ import argparse
 from copy import deepcopy
 from tqdm import tqdm
 
-from tne.data.process_raw_data import to_file
+from tne.data.split_ood import to_file
 from tne.data.split_ood import read_data
 
 
