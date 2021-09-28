@@ -10,9 +10,9 @@ For more details check out our paper ["Text-based NP Enrichment"](LINK), and [we
 
 
 * Key Links
-	* **TNE Dataset**: [Download](https://github.com/yanaiela/TNE/raw/master/data/tne_v1.zip)
+	* **TNE Dataset**: [Download](https://github.com/yanaiela/TNE#Download)
 	* **Paper**: ["Text-based NP Enrichment"](https://arxiv.org/abs/2109.12085)
-	* **Models Code**: [https://github.com/yanaiela/TNE/](https://github.com/yanaiela/TNE/)
+	* **Models Code**: [https://github.com/yanaiela/TNE/tree/main/tne/modeling](https://github.com/yanaiela/TNE/tree/main/tne/modeling)
 	* **Leaderboard**:  
 		* TNE:  [Leaderboard](https://leaderboard.allenai.org/tne/)
 		* TNE-OOD:  [Leaderboard](https://leaderboard.allenai.org/tne-ood/)
@@ -20,7 +20,15 @@ For more details check out our paper ["Text-based NP Enrichment"](LINK), and [we
 	* **Website**: [https://yanaiela.github.io/TNE](https://yanaiela.github.io/TNE)
 
 
-## Data Format
+## Data
+
+### Download
+* [Train](https://github.com/yanaiela/TNE/raw/main/data/train.jsonl.gz)
+* [Dev](https://github.com/yanaiela/TNE/raw/main/data/dev.jsonl.gz)
+* [Test (unlabeled)](https://github.com/yanaiela/TNE/raw/main/data/test_unlabeled.jsonl.gz)
+* [Test-OOD (unlabeled)](https://github.com/yanaiela/TNE/raw/main/data/ood_unlabeled.jsonl.gz)
+
+### Data Format
 
 The dataset is spread across four files, for the four different splits: train, dev, test and ood.
 Each file is in a jsonl format, containing a dictionary of a single document.
@@ -90,3 +98,21 @@ Eprint = {arXiv:2109.12085},
 
 ## Changelog
 - `27/09/2021` TNE was released: paper + dataset + exploration + demo
+
+
+## Q&A
+
+#### Q: But what about huggingface (dataset, hub, implementation)
+I found it easier to use the allennlp framework, but I might consider using hf infrastructure 
+as well in the future. Feel free to upload the dataset there, or suggest an 
+implementation using hf codebase.
+
+#### Q: If I find a bug?
+It happens! Please open an [issue](https://github.com/yanaiela/TNE/issues) and I'll do my best
+to address it.
+
+#### Q: What about additional trained models?
+I uploaded the best model we trained from the paper. 
+If there's interest, I can upload the others as well. Open an 
+[issue]((https://github.com/yanaiela/TNE/issues)) or email me.
+

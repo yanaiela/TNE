@@ -93,4 +93,4 @@ To view (many) more TNE examples, [explore TNE](/explore.md).
 ## **Download**
 
 - For the full documentation of the dataset and its format please refer to our [Github repository](https://github.com/yanaiela/TNE).  
-- Click here to [download TNE](https://github.com/yanaiela/TNE).
+- Click here to [download TNE](https://github.com/yanaiela/TNE#Download).
