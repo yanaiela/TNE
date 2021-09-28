@@ -2,7 +2,7 @@
 
 TNE is an NLU task, which focus on relations between noun phrases (NPs) that can be
 mediated via prepositions. 
-The dataset contains [5,497](LINK) documents, annotated exhaustively with all possible
+The dataset contains [5,497](https://yanaiela.github.io/TNE/#download) documents, annotated exhaustively with all possible
 links between the NPs in each document.
 
 The main data comes from WikiNews, which is used for train/dev/test. We also collected an additional set of
@@ -92,5 +92,6 @@ To view (many) more TNE examples, [explore TNE](/explore.md).
 
 ## **Download**
 
-- For the full documentation of the dataset and its format please refer to our [Github repository](https://github.com/yanaiela/TNE).  
+- For the full documentation of the dataset and its format please refer to our 
+[Github repository](https://github.com/yanaiela/TNE#data-format).  
 - Click here to [download TNE](https://github.com/yanaiela/TNE#Download).

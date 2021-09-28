@@ -114,5 +114,5 @@ to address it.
 #### Q: What about additional trained models?
 I uploaded the best model we trained from the paper. 
 If there's interest, I can upload the others as well. Open an 
-[issue]((https://github.com/yanaiela/TNE/issues)) or email me.
+[issue](https://github.com/yanaiela/TNE/issues) or email me.
 
