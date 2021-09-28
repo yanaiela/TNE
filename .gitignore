@@ -315,3 +315,8 @@ Thumbs.db
 .idea/
 allen_logs/
 /models/
+
+/data/dev.jsonl
+/data/ood_unlabeled.jsonl
+/data/test_unlabeled.jsonl
+/data/train.jsonl
