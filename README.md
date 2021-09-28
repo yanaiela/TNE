@@ -6,7 +6,8 @@ mediated via prepositions.
 The dataset contains 5,497 documents, annotated exhaustively with all possible
 links between the NPs in each document.
 
-For more details check out our paper ["Text-based NP Enrichment"](LINK), and [website](https://yanaiela.github.io/TNE).  
+For more details check out our paper ["Text-based NP Enrichment"](https://arxiv.org/abs/2109.12085),
+and [website](https://yanaiela.github.io/TNE).  
 
 
 * Key Links
