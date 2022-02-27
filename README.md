@@ -128,3 +128,7 @@ I uploaded the best model we trained from the paper.
 If there's interest, I can upload the others as well. Open an 
 [issue](https://github.com/yanaiela/TNE/issues) or email me.
 
+#### Why are there no labels in the released test-sets files?
+We decided to keep the labels hidden, to avoid overfitting on this dataset. 
+However, once you have a good model, you can upload your predictions to the [leaderboard](https://leaderboard.allenai.org/tne/) (and the [ood leaderboard](https://leaderboard.allenai.org/tne-ood/)), and find out your score!
+
