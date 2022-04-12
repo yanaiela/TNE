@@ -16,7 +16,7 @@ from tne.data.split_ood import read_data
 def convert(doc):
     converted_doc = deepcopy(doc)
     new_nps = []
-    for val in doc['nps'].items():
+    for val in doc['nps'].values():
         new_nps.append(val)
     converted_doc['nps'] = new_nps
 
