@@ -320,3 +320,8 @@ allen_logs/
 /data/ood_unlabeled.jsonl
 /data/test_unlabeled.jsonl
 /data/train.jsonl
+
+/data/dev-v1.1.jsonl
+/data/ood_unlabeled-v1.1.jsonl
+/data/test_unlabeled-v1.1.jsonl
+/data/train-v1.1.jsonl
