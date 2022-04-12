@@ -30,15 +30,19 @@ class TNEPredictor(Predictor):
         """
         document = json_dict['text']
         spacy_document = self._spacy(document)
-        tokens = [token.text for token in spacy_document]
-        entities = {}
-        for ind, chunk in enumerate(spacy_document.noun_chunks):
-            start = chunk.start
-            end = chunk.end - 1
-            entities[ind] = {
-                'first_token': start,
-                'last_token': end
-            }
+        if 'tokens' in json_dict:
+            tokens = json_dict['tokens']
+            entities = json_dict['nps']
+        else:
+            tokens = [token.text for token in spacy_document]
+            entities = {}
+            for ind, chunk in enumerate(spacy_document.noun_chunks):
+                start = chunk.start
+                end = chunk.end - 1
+                entities[ind] = {
+                    'first_token': start,
+                    'last_token': end
+                }
 
         instance = self._dataset_reader.text_to_instance(document, tokens, entities)
         return instance
