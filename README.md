@@ -39,7 +39,7 @@ A document consists of:
 * `text`: the text of the document. The title and subtitles (if exists) are separated with two new lines. The paragraphs
 are separated by a single new line.
 * `tokens`: a list of string, containing the tokenized tokens
-* `nps`: a dictionary, where each key is an np identifier, which contains another dictionary:
+* `nps`: a list of dictionaries, where each key is an np identifier, which contains another dictionary (note that this field was changed in v1.1 from a dictionary where each key is the np id to the dictionary, to a list of dictionaries, to match the huggingface datasets library):
   * `text`: the text of the np
   * `start_index`: an integer indicating the starting index in the text
   * `end_index`: an integer indicating the ending index in the text
@@ -90,6 +90,11 @@ allennlp train tne/modeling/configs/coupled_large.jsonnet \
          -s models/coupled_spanbert_large
 ```
 
+After training a model (or using the trained one), you can get the predictions file using:
+```
+allennlp predict models/coupled_spanbert_large/model.tar.gz data/test.jsonl --output-file coupled_large_predictions.jsonl --include-package bridging --use-dataset-reader --predictor tne_predictor
+```
+
 ### Trained Model
 We release the best model we achieved: `coupled-large` and it can be downloaded [here](https://storage.googleapis.com/ai2i/datasets/tne/coupled_spanbert_large.tar.gz).
 If there's interest in other models from the paper, please let me know via email or open an issue, 
@@ -107,9 +112,14 @@ Eprint = {arXiv:2109.12085},
 }
 ```
 
+## Submitting to the Leaderboard
+To submit your model's prediction to the leaderboard, you need to create an answer file.
+You can find details on the submission pocess [here](https://leaderboard.allenai.org/tne/submissions/get-started), and follow the evaluation code and tests [here](https://github.com/allenai/tne-evaluator)
+
 
 ## Changelog
 - `27/09/2021` TNE was released: paper + dataset + exploration + demo
+- `12/04/2021` Released v1.1 of the dataset. Changed the `nps` field from a dictionary of diciontaries, to a list of dictionaries, to match with huggingface's `datasets` library.
 
 
 ## Q&A
