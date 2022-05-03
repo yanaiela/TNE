@@ -23,6 +23,13 @@ and [website](https://yanaiela.github.io/TNE).
 
 ## Data
 
+### Load from Huggingface's Datasets Library
+```
+from datasets import load_dataset
+
+dataset = load_dataset("tne")
+```
+
 ### Download
 * [Train](https://github.com/yanaiela/TNE/raw/main/data/train.jsonl.gz)
 * [Dev](https://github.com/yanaiela/TNE/raw/main/data/dev.jsonl.gz)
@@ -118,8 +125,9 @@ You can find details on the submission pocess [here](https://leaderboard.allenai
 
 
 ## Changelog
-- `27/09/2021` TNE was released: paper + dataset + exploration + demo
+- `03/05/2021` The TNE dataset is on huggingface's [datasets library](https://huggingface.co/datasets/tne)
 - `12/04/2021` Released v1.1 of the dataset. Changed the `nps` field from a dictionary of diciontaries, to a list of dictionaries, to match with huggingface's `datasets` library.
+- `27/09/2021` TNE was released: paper + dataset + exploration + demo
 
 
 ## Q&A
