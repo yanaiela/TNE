@@ -125,8 +125,8 @@ You can find details on the submission pocess [here](https://leaderboard.allenai
 
 
 ## Changelog
-- `03/05/2021` The TNE dataset is on huggingface's [datasets library](https://huggingface.co/datasets/tne)
-- `12/04/2021` Released v1.1 of the dataset. Changed the `nps` field from a dictionary of diciontaries, to a list of dictionaries, to match with huggingface's `datasets` library.
+- `03/05/2022` The TNE dataset is on huggingface's [datasets library](https://huggingface.co/datasets/tne)
+- `12/04/2022` Released v1.1 of the dataset. Changed the `nps` field from a dictionary of diciontaries, to a list of dictionaries, to match with huggingface's `datasets` library.
 - `27/09/2021` TNE was released: paper + dataset + exploration + demo
 
 
