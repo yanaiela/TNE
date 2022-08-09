@@ -111,11 +111,19 @@ and I will upload them as well.
 ## Citation
 
 ```markdown
+
 @article{tne,
-Author = {Yanai Elazar and Victoria Basmov and Yoav Goldberg and Reut Tsarfaty},
-Title = {Text-based NP Enrichment},
-Year = {2021},
-Eprint = {arXiv:2109.12085},
+    author = {Elazar, Yanai and Basmov, Victoria and Goldberg, Yoav and Tsarfaty, Reut},
+    title = "{Text-based NP Enrichment}",
+    journal = {Transactions of the Association for Computational Linguistics},
+    volume = {10},
+    pages = {764-784},
+    year = {2022},
+    month = {07},
+    issn = {2307-387X},
+    doi = {10.1162/tacl_a_00488},
+    url = {https://doi.org/10.1162/tacl\_a\_00488},
+    eprint = {https://direct.mit.edu/tacl/article-pdf/doi/10.1162/tacl\_a\_00488/2037151/tacl\_a\_00488.pdf},
 }
 ```
 
@@ -125,6 +133,8 @@ You can find details on the submission pocess [here](https://leaderboard.allenai
 
 
 ## Changelog
+- `04/08/2022` TNE is officially published at TACL
+- `12/07/2022` We presented the paper at NAACL22
 - `03/05/2022` The TNE dataset is on huggingface's [datasets library](https://huggingface.co/datasets/tne)
 - `12/04/2022` Released v1.1 of the dataset. Changed the `nps` field from a dictionary of diciontaries, to a list of dictionaries, to match with huggingface's `datasets` library.
 - `27/09/2021` TNE was released: paper + dataset + exploration + demo
