@@ -99,7 +99,7 @@ allennlp train tne/modeling/configs/coupled_large.jsonnet \
 
 After training a model (or using the trained one), you can get the predictions file using:
 ```
-allennlp predict models/coupled_spanbert_large/model.tar.gz data/test.jsonl --output-file coupled_large_predictions.jsonl --include-package bridging --use-dataset-reader --predictor tne_predictor
+allennlp predict models/coupled_spanbert_large/model.tar.gz data/test.jsonl --output-file coupled_large_predictions.jsonl --include-package tne --use-dataset-reader --predictor tne_predictor
 ```
 
 ### Trained Model
